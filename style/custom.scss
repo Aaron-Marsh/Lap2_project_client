@@ -1,6 +1,6 @@
 $theme-colors: (
   "primary":   #8ecae6, //change your colours here
-  "secondary":  #ffb703,
+  "secondary":  #f9db5c,
   "success":    #023047,
   "info":       green,
   "warning":    yellow,
@@ -11,7 +11,7 @@ $theme-colors: (
 
 // this imports all bootstrap scss
 
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 
 
