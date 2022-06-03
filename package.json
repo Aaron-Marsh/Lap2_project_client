@@ -1,0 +1,22 @@
+{
+  "name": "lap2_project_client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass-dev": "sass --watch --update --style=expanded ./style/custom.scss:./style/custom.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aaron-Marsh/Lap2_project_client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aaron-Marsh/Lap2_project_client/issues"
+  },
+  "homepage": "https://github.com/Aaron-Marsh/Lap2_project_client#readme",
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}
