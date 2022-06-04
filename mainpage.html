@@ -23,23 +23,26 @@
     
     <div class="d-flex p-3">
         <img src="./imgs/Untitled design.png" class="img-fluid" alt="rabbit habit logo" width="100">
-        <h1 class="text-primary pt-4 mt-2" style="font-size: 35px;">Rabbit Habits!</h1>
+        <h1 class="text-primary pt-3 mt-2" style="font-size: 40px;">Rabbit Habits!</h1>
     </div>
 
     <div class="container btn-group">
-        <div class="row text-center px-5">
+        <div class="row text-center pt-5 px-4">
+                <div class=" d-flex flex-row" >
+                <button class="btn-lg btn-primary text-white mt-3 rounded-circle border-0 me-1" type="button" style="font-size: 25px;">-</button>
+                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">Brush Teeth</button>
+                <button class="btn-lg btn-primary text-white mt-3 rounded-circle border-0 ms-1" type="button" style="font-size: 25px;">+</button>
+                
+                </div>
+                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" data-toggle="modal" data-target="#trackHabit" style="font-size: 25px; ">Drink Water</button>
 
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 30px;">Brush Teeth</button>
+                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">5 a day</button>
 
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 30px;">Drink Water</button>
+                <button class="btn-lg btn-secondary text-white  mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">Call Family</button>
 
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 30px;">5 a day</button>
+                <button class="btn-lg btn-secondary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">5km Jog</button>
 
-                <button class="btn-lg btn-secondary text-white  mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 30px;">Call Family</button>
-
-                <button class="btn-lg btn-secondary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 30px;">5km Jog</button>
-
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 30px;">Add habit!</button>
+                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;">Add habit!</button>
 
         </div>
 
@@ -64,6 +67,33 @@
               </div>
             </div>
           </div>
+
+
+          <div class="modal fade" id="trackHabit" tabindex="-1" role="dialog" aria-labelledby="TrackHabitTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+              <div class="modal-content rounded-pill">
+                <div class="modal-header justify-content-center  border-0">
+                    <div class="row">
+                  <h5 class="modal-title text-center mt-3" id="TrackHabitTitle w-100">Current Streak: </h5>
+                  <h1 class="text-center">5 Days</h1>
+                </div>
+                </div>
+                <div class="modal-body ">
+                    <p>Today you have tracked -- out of your goal --</p>
+                <div class="container text-center">
+                    
+                    <button type="button" class="btn-lg btn-secondary text-white mb-3 rounded-circle border-0 ">-</button>
+                  <button type="button" class="btn-lg btn-primary text-white mb-3 rounded-circle border-0 ">+</button>
+                </div>
+        
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
     </div>
 
