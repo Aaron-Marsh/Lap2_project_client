@@ -1,0 +1,1 @@
+// This file in theory contains functions to retrieve data from the API which is not really meant to be protected by any authorisation.... Maybe this would be the place where the user retrieves all of its activities in an 'authorised' manner instead of non-authorised endpoint
