@@ -3,6 +3,7 @@
 // We have to decide with Billie if we want to do this creating elements and looping through them in JS or if we want to use EJS and work from the HTML. 
 
 
+let heroku_url = 'https://glacial-plains-13166.herokuapp.com'
 
 const divToAppend = document.querySelector('#divToAppend')
 
@@ -59,11 +60,6 @@ function createDivHabit(habitText, habitID){
     divToAppend.appendChild(mainDiv)
 
 }
-
-
-createDivHabit('this is some sample text', 'ID 1')
-createDivHabit('this is some sample text', 'ID 2')
-createDivHabit('this is some sample text', 'ID 3')
 
 
 
@@ -164,11 +160,49 @@ function addHabit(habitName, frequency, amount){
 
 
 function refreshPage(){
+    // get user id from local storage
+    const userId = 'billie'
     //fetch request to the server
+    const dataPromise = getAllHabits(userId)
 
     // get the data
-
     // render data with createDivHabit
+
+    const data = dataPromise.then((d)=>{
+        console.log('data is here')
+        console.log('this is d ' + d)
+       
+        d
+        // data.habits.forEach(createDivHabit(data.title, data.id))
+    })
+    
 
     console.log('the page was refreshed')
 }
+
+
+async function getAllHabits(userId){
+
+    let url = `${heroku_url}/${userId}`
+
+    url = 'https://glacial-plains-13166.herokuapp.com/habits'
+
+    let response = await fetch(url)
+                    .then(r => r.json())
+                    .then(data => {
+                        data
+                    })
+                    .catch(err => console.warn('Ops, something went wrong!', err))  
+    
+    return response
+    
+}
+
+
+
+
+createDivHabit('this is some sample text', 'ID 1')
+createDivHabit('this is some sample text', 'ID 2')
+createDivHabit('this is some sample text', 'ID 3')
+
+refreshPage()
