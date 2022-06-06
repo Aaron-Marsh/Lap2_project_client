@@ -77,11 +77,31 @@ function plusClicked(e, habitID){
 
 function mainClicked(e, habitID){
     e.preventDefault()
+    modalUpdate(habitID)
     console.log('main was clicked with habit id: ' + habitID)
 }
 
 
 
+///////////////////////////////////////////////////////////
+// MODAL STUFF
+
+const streakText = document.querySelector('#streakText')
+const goalText = document.querySelector('#goalText')
+const deleteHabitBtn = document.querySelector('#deleteHabit')
+
+
+
+
+
+
+
+
+
+
+function modalUpdate(habitID){
+    //call 
+}
 
 //Modal(?)
 function getStreak(habitID){

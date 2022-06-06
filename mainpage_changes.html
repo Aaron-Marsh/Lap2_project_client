@@ -41,7 +41,7 @@
 
                     
             </div>
-            
+
             <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;">Add habit!</button>   
         </div>
 
@@ -75,20 +75,15 @@
                 <div class="modal-header justify-content-center  border-0">
                     <div class="row">
                   <h5 class="modal-title text-center mt-3" id="TrackHabitTitle w-100">Current Streak: </h5>
-                  <h1 class="text-center">5 Days</h1>
+                  <h1 id="streakText" class="text-center">5 Days</h1>
                 </div>
                 </div>
                 <div class="modal-body ">
-                    <p>Today you have tracked -- out of your goal --</p>
-                <div class="container text-center pt-3">
-
-                    <button type="button" class="btn-lg btn-secondary text-white mb-3 rounded-circle border-0 ">-</button>
-                    <button type="button" class="btn-lg btn-primary text-white mb-3 rounded-circle border-0 ">+</button>
-                </div>
+                    <p id="goalText">Today you have tracked -- out of your goal --</p>
 
             </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn-sm btn-primary text-white mb-3 rounded-pill border-0">Delete Habit</button>
+                    <button type="button" class="btn-sm btn-primary text-white mb-3 rounded-pill border-0" id="deleteHabit">Delete Habit</button>
                 </div>
               </div>
             </div>
