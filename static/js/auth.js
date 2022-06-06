@@ -66,6 +66,8 @@ async function requestLogin(username, password){
         .then(data=>{
             login(data)
             console.log('logged in!')
+
+            // Check the server response, if the user is logged in properly - redirect to mainpage.html (change hash?)
         })
     } catch (err) {
         console.warn(`Error: ${err}`);
