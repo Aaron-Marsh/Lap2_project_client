@@ -98,11 +98,34 @@ const goalText = document.querySelector('#goalText')
 const deleteHabitBtn = document.querySelector('#deleteHabit')
 
 
+const addHabitBtn = document.querySelector('#addHabitBtn')
+
+
 // This is the event listener for the delete button which retrieves the local storage for the current habitId and calls delete habit which has a fetch function
 deleteHabitBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     let habitID = localStorage.getItem('habitId')
     deleteHabit(habitID)
+})
+
+addHabitBtn.addEventListener('click', (e)=>{
+    e.preventDefault()
+
+    const habitName = document.querySelector('#habitName').value
+    document.querySelector('#habitName').value = ''
+
+    const frequency = document.querySelector('#frequency').value
+    document.querySelector('#frequency').value = ''
+
+    const amount = document.querySelector('#amount').value
+    document.querySelector('#amount').value = ''
+
+        
+    
+    addHabit(habitName, frequency, amount)
+    // console.log(e.params.habitName, e.params.frequency, e.params.amount)
+
+    //We have to pass the form data in here 
 })
 
 
@@ -119,6 +142,7 @@ function modalUpdate(habitID, goalStreakText, currentN, goalN){
 }
 
 
+
 function deleteHabit(habitID){
     // fetch function to delete based on habitID
     
@@ -129,10 +153,22 @@ function deleteHabit(habitID){
 
 
 
-function addHabit(habitID){
+function addHabit(habitName, frequency, amount){
 
+    console.log(habitName, frequency, amount)
+    //Fetch function to add habit
 
+    refreshPage()
 }
 
 
 
+function refreshPage(){
+    //fetch request to the server
+
+    // get the data
+
+    // render data with createDivHabit
+
+    console.log('the page was refreshed')
+}
