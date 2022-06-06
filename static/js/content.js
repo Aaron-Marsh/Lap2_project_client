@@ -6,6 +6,9 @@
 
 const divToAppend = document.querySelector('#divToAppend')
 
+//////////////////////////////////////////////////////////////////
+// In here we can actually pass other parameters so to feed the main button event listener when it refers to the modal!!
+//////////////////////////////////////////////////////////////////
 
 function createDivHabit(habitText, habitID){
     const fields = [
@@ -44,7 +47,11 @@ function createDivHabit(habitText, habitID){
                 break;
             default:
                 field.addEventListener('click', e=>{
-                    mainClicked(e, habitID)
+                    // In here you can pass way more stuff so to do it once 
+                    let goalStreakText = 'this is changed now '+ habitID
+                    let currentN = 3
+                    let goalN = 5
+                    mainClicked(e, habitID, goalStreakText, currentN, goalN)
                 })
         }        
     })
@@ -75,9 +82,9 @@ function plusClicked(e, habitID){
 }
 
 
-function mainClicked(e, habitID){
+function mainClicked(e, habitID, goalStreakText,currentN, goalN){
     e.preventDefault()
-    modalUpdate(habitID)
+    modalUpdate(habitID, goalStreakText, currentN, goalN)
     console.log('main was clicked with habit id: ' + habitID)
 }
 
@@ -91,26 +98,35 @@ const goalText = document.querySelector('#goalText')
 const deleteHabitBtn = document.querySelector('#deleteHabit')
 
 
+// This is the event listener for the delete button which retrieves the local storage for the current habitId and calls delete habit which has a fetch function
+deleteHabitBtn.addEventListener('click', (e)=>{
+    e.preventDefault()
+    let habitID = localStorage.getItem('habitId')
+    deleteHabit(habitID)
+})
 
 
 
+//Called every time an habit button is pressed, changes the text in the modal popup and sets the habitID variable in localstorage for the delete button
+function modalUpdate(habitID, goalStreakText, currentN, goalN){
+    console.log('modal update was called')
+    streakText.textContent = goalStreakText
+    goalText.textContent = `Today you have tracked ${currentN} out of your goal ${goalN}`
 
+    localStorage.setItem('habitId', habitID)
 
-
-
-
-function modalUpdate(habitID){
     //call 
 }
 
-//Modal(?)
-function getStreak(habitID){
-
-}
 
 function deleteHabit(habitID){
-
+    // fetch function to delete based on habitID
+    
+    console.log('habit deleted '+ habitID)
+    
 }
+
+
 
 
 function addHabit(habitID){
