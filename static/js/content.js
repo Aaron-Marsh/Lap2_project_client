@@ -163,17 +163,8 @@ function refreshPage(){
     // get user id from local storage
     const userId = 'billie'
     //fetch request to the server
-    const dataPromise = getAllHabits(userId)
-
-    // get the data
-    // render data with createDivHabit
-
-    const data = dataPromise.then((d)=>{
-        console.log('data is here')
-        console.log('this is d ' + d)
-       
-        d
-        // data.habits.forEach(createDivHabit(data.title, data.id))
+    getAllHabits(userId).then(data=>{
+        console.log('data from refresh page ' + data.habits[0])
     })
     
 
@@ -182,21 +173,28 @@ function refreshPage(){
 
 
 async function getAllHabits(userId){
+    try{
+        let url = `${heroku_url}/${userId}`
+        url = 'https://glacial-plains-13166.herokuapp.com/habits'
 
-    let url = `${heroku_url}/${userId}`
-
-    url = 'https://glacial-plains-13166.herokuapp.com/habits'
-
-    let response = await fetch(url)
-                    .then(r => r.json())
-                    .then(data => {
-                        data
-                    })
-                    .catch(err => console.warn('Ops, something went wrong!', err))  
-    
-    return response
-    
+        const response = await fetch(url)
+        const data = await response.json()
+        console.log(data)
+        return data
+    }catch(err){
+        console.log({message: err.message})
+    }
 }
+
+// async function getAllHabits(userId){
+//     let response = await fetch(url)
+//                     .then(r => r.json())
+//                     .then(data => {
+//                         data
+//                     })
+//                     .catch(err => console.warn('Ops, something went wrong!', err))  
+//     return response  
+// }
 
 
 

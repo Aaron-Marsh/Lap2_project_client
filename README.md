@@ -5,7 +5,7 @@
 
 # To do immediate
 
-- content.js line 184 fix fetch!
+- content.js line 167 the data needs to be unpacked and passed onto the function that renders the page 
 
 
 
