@@ -163,38 +163,15 @@ function refreshPage(){
     // get user id from local storage
     const userId = 'billie'
     //fetch request to the server
-    getAllHabits(userId).then(data=>{
-        console.log('data from refresh page ' + data.habits[0])
-    })
+    
     
 
     console.log('the page was refreshed')
 }
 
 
-async function getAllHabits(userId){
-    try{
-        let url = `${heroku_url}/${userId}`
-        url = 'https://glacial-plains-13166.herokuapp.com/habits'
 
-        const response = await fetch(url)
-        const data = await response.json()
-        console.log(data)
-        return data
-    }catch(err){
-        console.log({message: err.message})
-    }
-}
 
-// async function getAllHabits(userId){
-//     let response = await fetch(url)
-//                     .then(r => r.json())
-//                     .then(data => {
-//                         data
-//                     })
-//                     .catch(err => console.warn('Ops, something went wrong!', err))  
-//     return response  
-// }
 
 
 

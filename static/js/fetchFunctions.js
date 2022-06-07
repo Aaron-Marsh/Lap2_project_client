@@ -137,7 +137,7 @@ async function fetchCreateUser(username, password){
 
 
 
-
+//Logs in and sets local storage for userid and username, changes location.hash to mainpage
 
 async function fetchLogin(username, password){
     try{
@@ -153,8 +153,15 @@ async function fetchLogin(username, password){
             },
             body: JSON.stringify(habitData) 
           })
-        const data = await response.text()
-        console.log(data)
+        const data = await response.json()
+
+        console.log(data.userId)
+
+        localStorage.setItem('userid', data.userId);
+        localStorage.setItem('username', data.username);
+
+        location.hash = '#mainpage'
+
         return data
 
     }catch(err){
@@ -162,12 +169,15 @@ async function fetchLogin(username, password){
     }
 }
 
-const loginExample = fetchLogin('Gio', 'pass')
+// const loginExample = fetchLogin('Gio', 'pass')
 
-console.log(loginExample)
+// loginExample.then((data)=>{
+//     const {username, userId, prevDate} = data
+//     console.log( username,userId,prevDate)
+// })
 
 
-
+// console.log('localstorage=' + localStorage.getItem('userid'))
 
 
 

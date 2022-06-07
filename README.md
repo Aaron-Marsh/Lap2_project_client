@@ -18,3 +18,9 @@
 
 
     - Fetch for login and signup!
+
+
+
+loading into html 
+
+- fetchFunctions
