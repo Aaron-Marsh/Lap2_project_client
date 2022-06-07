@@ -13,4 +13,9 @@ describe('mainpage.html', () => {
         document = await dom.window.document
     })
 
+    it('adds the input value to the h1', ()=>{
+        const h1 = document.querySelector('h1')
+        expect(h1.innerHTML).toBeTruthy()
+    })
+
  })
