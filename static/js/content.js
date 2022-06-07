@@ -142,7 +142,7 @@ async function addHabit(habitName, frequency, goal, date){
     let userId = localStorage.getItem('userid')
 
 
-    userId = '629f5436dd2d086bd7dd757e'
+    // userId = '629f5436dd2d086bd7dd757e'
 
 
 
@@ -175,7 +175,8 @@ function refreshPage(){
 
     // get user id from local storage
     let userId = localStorage.getItem('userid')
-    userId = '629f5436dd2d086bd7dd757e'
+    
+    // userId = '629f5436dd2d086bd7dd757e'
 
     //fetch request to the server
     const data = fetchGetHabitsByUser(userId)
