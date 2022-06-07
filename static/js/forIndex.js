@@ -37,6 +37,14 @@ loginBtn.addEventListener('click', e=>{
 
 signupBtn.addEventListener('click', e=>{
     e.preventDefault()
-    requestRegistration(userName.value, password.value)
+
+    const responseRegistration = fetchCreateUser(userName.value, password.value)
+
+    responseRegistration.then((i)=>{
+        console.log(i)
+    })
+
+    password.value = ''
+
     // popup!
 })
