@@ -36,10 +36,35 @@ async function fetchDeleteHabit(habitId){
 // console.log(fetchDeleteHabit('629f2322f6598ab936693fb3'))
 
 
+async function fetchNewHabit(title, frequency, goal, date, userId){
+    try{
+        let url = `${heroku_url}/habits/new`
+        const habitData = {
+            "title": title,
+            "frequency": frequency,
+            "goal": goal,
+            "startdate": date,
+            "userId": userId
+        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        console.log(data)
+        return data
 
+    }catch(err){
+        return({message: err.message})
+    }
+}
 
+const newHabit = fetchNewHabit('Different habit from fetch', 'daily', 6, '22-12-10', 'Aaron')
 
-
+console.log(newHabit)
 
 // {
 //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
