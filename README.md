@@ -15,3 +15,6 @@
     - delete habit
     - add habit
     - patch +/-
+
+
+    - Fetch for login and signup!
