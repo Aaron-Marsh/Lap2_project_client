@@ -11,6 +11,8 @@ const divToAppend = document.querySelector('#divToAppend')
 //////////////////////////////////////////////////////////////////
 
 function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
+    //Target div to append and remove content
+
     const fields = [
         {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0'}},
         {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0 w-100', 'data-toggle': "modal", 'data-target': "#trackHabit"}},
@@ -129,11 +131,17 @@ addHabitBtn.addEventListener('click', (e)=>{
 })
 
 
-function addHabit(habitName, frequency, goal, date){
+async function addHabit(habitName, frequency, goal, date){
 
     //Fetch function to add habit
-    const userId = localStorage.getItem('userid')
-    fetchCreateHabit(habitName, frequency, goal, date, userId)
+    let userId = localStorage.getItem('userid')
+
+
+    userId = '629f5436dd2d086bd7dd757e'
+
+
+
+    await fetchCreateHabit(habitName, frequency, goal, date, userId)
 
     refreshPage()
 }
@@ -158,9 +166,11 @@ function modalUpdate(habitID, goalStreakText, currentN, goalN){
 
 
 function refreshPage(){
+    divToAppend.innerHTML = ''
+
     // get user id from local storage
     let userId = localStorage.getItem('userid')
-    userId = 'Billie'
+    userId = '629f5436dd2d086bd7dd757e'
 
     //fetch request to the server
     const data = fetchGetHabitsByUser(userId)
@@ -194,8 +204,5 @@ logoutBtn.addEventListener('click', ()=>{
 })
 
 
-createDivHabit('this is some sample text', 'ID 1')
-createDivHabit('this is ', 'ID 2')
-createDivHabit('this is some sample text', 'ID 3')
 
 refreshPage()

@@ -13,11 +13,11 @@ async function fetchGetHabitsByUser(userId){
     }
 }
 
-const dataAaron = fetchGetHabitsByUser('Aaron')
+// const dataAaron = fetchGetHabitsByUser('Aaron')
 
-dataAaron.then((d)=>{
-    console.log(d)
-})
+// dataAaron.then((d)=>{
+//     console.log(d)
+// })
 
 
 
