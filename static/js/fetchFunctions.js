@@ -36,7 +36,7 @@ async function fetchDeleteHabit(habitId){
 // console.log(fetchDeleteHabit('629f2322f6598ab936693fb3'))
 
 
-async function fetchNewHabit(title, frequency, goal, date, userId){
+async function fetchCreateHabit(title, frequency, goal, date, userId){
     try{
         let url = `${heroku_url}/habits/new`
         const habitData = {
@@ -62,9 +62,9 @@ async function fetchNewHabit(title, frequency, goal, date, userId){
     }
 }
 
-const newHabit = fetchNewHabit('Different habit from fetch', 'daily', 6, '22-12-10', 'Aaron')
+// const newHabit = fetchCreateHabit('Different habit from fetch', 'daily', 6, '22-12-10', 'Aaron')
 
-console.log(newHabit)
+// console.log(newHabit)
 
 
 
@@ -94,15 +94,77 @@ async function fetchPatchHabit(habitId, command){
     }
 }
 
-const patchHabit = fetchPatchHabit('629dd294da9aff4209426a5d', -1)
+// const patchHabit = fetchPatchHabit('629dd294da9aff4209426a5d', -1)
 
-console.log(patchHabit)
-
-
+// console.log(patchHabit)
 
 
 
+async function fetchCreateUser(username, password){
+    try{
+        let url = `${heroku_url}/auth/register`
+        const habitData = {
+            "username": username,
+            "password": password
+        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        console.log(data)
+        return data
 
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// const newUser = fetchCreateUser('Gio', 'pass')
+// console.log(newUser)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function fetchLogin(username, password){
+    try{
+        let url = `${heroku_url}/auth/login`
+        const habitData = {
+            "username": username,
+            "password": password
+        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        console.log(data)
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+const loginExample = fetchLogin('Gio', 'pass')
+
+console.log(loginExample)
 
 
 
