@@ -173,7 +173,19 @@ function refreshPage(){
 
 
 
+/////////////////////////////////////////////////
+/// Logout 
 
+const logoutBtn = document.querySelector('#logoutBtn')
+
+logoutBtn.addEventListener('click', ()=>{
+
+    localStorage.clear()
+
+    //Jump to other HTML
+    //////// Instead of jumping to other HTML it changes the location hash which renders the login page again
+    window.open('../../index.html', '_self')
+})
 
 
 createDivHabit('this is some sample text', 'ID 1')
