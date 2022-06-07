@@ -40,11 +40,13 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
             case '-':
                 field.addEventListener('click', e=>{
                     minusClicked(e, habitID)
+                    currentN -= 1
                 })
                 break;
             case '+':
                 field.addEventListener('click', e=>{
                     plusClicked(e, habitID)
+                    currentN += 1
                 })
                 break;
             default:
