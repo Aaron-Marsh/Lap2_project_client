@@ -200,7 +200,7 @@ async function getAllHabits(userId){
 
 
 createDivHabit('this is some sample text', 'ID 1')
-createDivHabit('this is some sample text', 'ID 2')
+createDivHabit('this is ', 'ID 2')
 createDivHabit('this is some sample text', 'ID 3')
 
 refreshPage()
