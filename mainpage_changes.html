@@ -19,6 +19,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <script src="static/js/content.js" type="module" defer></script>
+        <script src="static/js/fetchFunctions.js"></script>
         
         <title>Rabbit Habits</title>
     </head>
@@ -42,7 +43,8 @@
                     
             </div>
 
-            <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;" >Add habit!</button>   
+            <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;" >Add habit!</button>  
+            <button class="btn btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" style="font-size: 25px;" id="logoutBtn">LogOut</button>    
         </div>
 
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -83,7 +85,7 @@
 
             </div>
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn-sm btn-primary text-white mb-3 rounded-pill border-0" id="deleteHabit">Delete Habit</button>
+                    <button type="button" class="btn-sm btn-primary text-white mb-3 rounded-pill border-0" id="deleteHabit" data-dismiss="modal">Delete Habit</button>
                 </div>
               </div>
             </div>

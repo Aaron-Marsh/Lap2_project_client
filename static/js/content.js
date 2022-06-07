@@ -3,7 +3,6 @@
 // We have to decide with Billie if we want to do this creating elements and looping through them in JS or if we want to use EJS and work from the HTML. 
 
 
-let heroku_url = 'https://glacial-plains-13166.herokuapp.com'
 
 const divToAppend = document.querySelector('#divToAppend')
 
@@ -11,7 +10,9 @@ const divToAppend = document.querySelector('#divToAppend')
 // In here we can actually pass other parameters so to feed the main button event listener when it refers to the modal!!
 //////////////////////////////////////////////////////////////////
 
-function createDivHabit(habitText, habitID){
+function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
+    //Target div to append and remove content
+
     const fields = [
         {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0'}},
         {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0 w-100', 'data-toggle': "modal", 'data-target': "#trackHabit"}},
@@ -39,19 +40,19 @@ function createDivHabit(habitText, habitID){
             case '-':
                 field.addEventListener('click', e=>{
                     minusClicked(e, habitID)
+                    currentN -= 1
                 })
                 break;
             case '+':
                 field.addEventListener('click', e=>{
                     plusClicked(e, habitID)
+                    currentN += 1
                 })
                 break;
             default:
                 field.addEventListener('click', e=>{
                     // In here you can pass way more stuff so to do it once 
-                    let goalStreakText = 'this is changed now '+ habitID
-                    let currentN = 3
-                    let goalN = 5
+
                     mainClicked(e, habitID, goalStreakText, currentN, goalN)
                 })
         }        
@@ -61,20 +62,25 @@ function createDivHabit(habitText, habitID){
 
 }
 
-
+// let goalStreakText = 'this is changed now '+ habitID
+// let currentN = 3
+// let goalN = 5
 
 
 function minusClicked(e, habitID){
     e.preventDefault()
-    // fetch...
-    // send in the request the habitID, letting it know that the - button was clicked so the backend can update this info
+
+    fetchPatchHabit(habitID, -1)
+
     console.log('minus was clicked with habit id: ' + habitID)
 }
 
 function plusClicked(e, habitID){
     e.preventDefault()
+
+    fetchPatchHabit(habitID, 1)
+
     console.log('plus was clicked with habit id: ' + habitID)
-    //
 }
 
 
@@ -101,7 +107,11 @@ const addHabitBtn = document.querySelector('#addHabitBtn')
 deleteHabitBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     let habitID = localStorage.getItem('habitId')
-    deleteHabit(habitID)
+
+    fetchDeleteHabit(habitID).then((d)=>{
+        refreshPage()
+    })
+    
 })
 
 addHabitBtn.addEventListener('click', (e)=>{
@@ -116,14 +126,30 @@ addHabitBtn.addEventListener('click', (e)=>{
     const amount = document.querySelector('#amount').value
     document.querySelector('#amount').value = ''
 
-        
+    let today = new Date;
+    let currentdate = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
     
-    addHabit(habitName, frequency, amount)
+    addHabit(habitName, frequency, amount, currentdate)
     // console.log(e.params.habitName, e.params.frequency, e.params.amount)
 
     //We have to pass the form data in here 
 })
 
+
+async function addHabit(habitName, frequency, goal, date){
+
+    //Fetch function to add habit
+    let userId = localStorage.getItem('userid')
+
+
+    // userId = '629f5436dd2d086bd7dd757e'
+
+
+
+    await fetchCreateHabit(habitName, frequency, goal, date, userId)
+
+    refreshPage()
+}
 
 
 //Called every time an habit button is pressed, changes the text in the modal popup and sets the habitID variable in localstorage for the delete button
@@ -139,32 +165,26 @@ function modalUpdate(habitID, goalStreakText, currentN, goalN){
 
 
 
-function deleteHabit(habitID){
-    // fetch function to delete based on habitID
-    
-    console.log('habit deleted '+ habitID)
-    
-}
 
 
-
-
-function addHabit(habitName, frequency, amount){
-
-    console.log(habitName, frequency, amount)
-    //Fetch function to add habit
-
-    refreshPage()
-}
 
 
 
 function refreshPage(){
+    divToAppend.innerHTML = ''
+
     // get user id from local storage
-    const userId = 'billie'
+    let userId = localStorage.getItem('userid')
+    
+    // userId = '629f5436dd2d086bd7dd757e'
+
     //fetch request to the server
-    getAllHabits(userId).then(data=>{
-        console.log('data from refresh page ' + data.habits[0])
+    const data = fetchGetHabitsByUser(userId)
+
+    data.then((d)=>{
+        d.habits.forEach((o)=>{
+            createDivHabit(o.title, o.id, o.frequency, o.current, o.goal)
+        })
     })
     
 
@@ -172,35 +192,23 @@ function refreshPage(){
 }
 
 
-async function getAllHabits(userId){
-    try{
-        let url = `${heroku_url}/${userId}`
-        url = 'https://glacial-plains-13166.herokuapp.com/habits'
-
-        const response = await fetch(url)
-        const data = await response.json()
-        console.log(data)
-        return data
-    }catch(err){
-        console.log({message: err.message})
-    }
-}
-
-// async function getAllHabits(userId){
-//     let response = await fetch(url)
-//                     .then(r => r.json())
-//                     .then(data => {
-//                         data
-//                     })
-//                     .catch(err => console.warn('Ops, something went wrong!', err))  
-//     return response  
-// }
 
 
 
+/////////////////////////////////////////////////
+/// Logout 
 
-createDivHabit('this is some sample text', 'ID 1')
-createDivHabit('this is ', 'ID 2')
-createDivHabit('this is some sample text', 'ID 3')
+const logoutBtn = document.querySelector('#logoutBtn')
+
+logoutBtn.addEventListener('click', ()=>{
+
+    localStorage.clear()
+
+    //Jump to other HTML
+    //////// Instead of jumping to other HTML it changes the location hash which renders the login page again
+    window.open('../../index.html', '_self')
+})
+
+
 
 refreshPage()

@@ -10,11 +10,8 @@
 
 
 
-- fetch functions for content.js
-    - get all users habits
-    - delete habit
-    - add habit
-    - patch +/-
 
-
-    - Fetch for login and signup!
+- To do
+- Modal popup for user not found in login
+    - the same can be used if in sign up the username is already taken
+    
