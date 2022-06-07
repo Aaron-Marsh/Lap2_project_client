@@ -23,4 +23,5 @@
 
 loading into html 
 
-- fetchFunctions
+- fetchFunctions.js
+- content.js

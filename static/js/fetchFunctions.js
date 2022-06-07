@@ -5,8 +5,7 @@ async function fetchGetHabitsByUser(userId){
     try{
         let url = `${heroku_url}/habits/user/${userId}`
         const response = await fetch(url)
-        const data = await response.text()
-        console.log('this is the fetched data ' +data)
+        const data = await response.json()
         return data
 
     }catch(err){
@@ -14,9 +13,14 @@ async function fetchGetHabitsByUser(userId){
     }
 }
 
-// const dataAaron = fetchGetHabitsByUser('Aaron')
+const dataAaron = fetchGetHabitsByUser('Aaron')
 
-// console.log(dataAaron)
+dataAaron.then((d)=>{
+    console.log(d)
+})
+
+
+
 
 
 async function fetchDeleteHabit(habitId){
@@ -132,11 +136,6 @@ async function fetchCreateUser(username, password){
 
 
 
-
-
-
-
-
 //Logs in and sets local storage for userid and username, changes location.hash to mainpage
 
 async function fetchLogin(username, password){
@@ -180,28 +179,3 @@ async function fetchLogin(username, password){
 // console.log('localstorage=' + localStorage.getItem('userid'))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// {
-//     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//     mode: 'cors', // no-cors, *cors, same-origin
-//     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//     credentials: 'same-origin', // include, *same-origin, omit
-//     headers: {
-//       'Content-Type': 'application/json'
-//       // 'Content-Type': 'application/x-www-form-urlencoded',
-//     },
-//     redirect: 'follow', // manual, *follow, error
-//     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-//     body: JSON.stringify(data) // body data type must match "Content-Type" header
-//   }
