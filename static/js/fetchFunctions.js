@@ -66,6 +66,60 @@ const newHabit = fetchNewHabit('Different habit from fetch', 'daily', 6, '22-12-
 
 console.log(newHabit)
 
+
+
+
+
+
+async function fetchPatchHabit(habitId, command){
+    try{
+        let url = `${heroku_url}/habits/${habitId}`
+        const habitData = {
+            "id": habitId,
+            "command": command
+        }
+        const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        console.log(data)
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+const patchHabit = fetchPatchHabit('629dd294da9aff4209426a5d', -1)
+
+console.log(patchHabit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // {
 //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
 //     mode: 'cors', // no-cors, *cors, same-origin
