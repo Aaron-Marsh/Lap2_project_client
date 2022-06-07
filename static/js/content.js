@@ -106,7 +106,10 @@ deleteHabitBtn.addEventListener('click', (e)=>{
     e.preventDefault()
     let habitID = localStorage.getItem('habitId')
 
-    fetchDeleteHabit(habitID)
+    fetchDeleteHabit(habitID).then((d)=>{
+        refreshPage()
+    })
+    
 })
 
 addHabitBtn.addEventListener('click', (e)=>{
