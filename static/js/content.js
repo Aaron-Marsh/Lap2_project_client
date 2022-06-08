@@ -39,14 +39,31 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
         switch(f.value){
             case '-':
                 field.addEventListener('click', e=>{
-                    minusClicked(e, habitID)
-                    currentN -= 1
+
+                    if(currentN == 0 || currentN == goalN){
+                        field.setAttribute('disabled', '')
+                    }else{
+                        minusClicked(e, habitID)
+                        currentN -= 1
+                    }
+
                 })
                 break;
             case '+':
                 field.addEventListener('click', e=>{
-                    plusClicked(e, habitID)
-                    currentN += 1
+                    
+                    if(currentN == goalN){
+                        field.setAttribute('disabled', '')
+                    } 
+                    else{
+                        plusClicked(e, habitID)
+                        currentN += 1
+                    }
+                    
+                    if(currentN != 0 && currentN != goalN){
+                        field.parentNode.firstChild.removeAttribute('disabled')
+                    }       
+                    
                 })
                 break;
             default:
@@ -55,7 +72,7 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
 
                     mainClicked(e, habitID, goalStreakText, currentN, goalN)
                 })
-        }        
+        } 
     })
 
     divToAppend.appendChild(mainDiv)

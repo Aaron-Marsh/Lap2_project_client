@@ -160,7 +160,7 @@ it('favicon script is not blank', ()=>{
 // class vs att
 
 
-it.only('"modal" has a style attribute', ()=>{	
+it('"modal" has a style attribute', ()=>{	
 	const addhabitbtn = document.querySelector('#firstaddhabit')
 
 	console.log("BBdsdasdasdasdasBOOOOOO",addhabitbtn.hasAttribute("style"))
