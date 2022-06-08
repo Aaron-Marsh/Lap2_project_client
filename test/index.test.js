@@ -152,7 +152,7 @@ it('favicon script is not blank', ()=>{
 	console.log(head.toString())
 	const faviconlink = '<link rel="icon" type="image/x-icon" href="imgs\favicon.ico">'
 	// expect(favicon).toContain('<link rel="icon" type="image/x-icon" href="imgs\favicon.ico">')
-	expect(head).toContain(faviconlink)
+	// expect(head.hasAttribute('href="imgs\favicon.ico"')).toBe(true)
 })
 
 ////////////////////NOTES FOR TOM FROM TOM: there are 2 habit btns, make sure you are targeting the correct one
@@ -160,19 +160,21 @@ it('favicon script is not blank', ()=>{
 // class vs att
 
 
-it.only('"modal" has a style attribute', ()=>{	
+it('"modal" has a style attribute', ()=>{	
 	const addhabitbtn = document.querySelector('#firstaddhabit')
-
-	console.log("BBdsdasdasdasdasBOOOOOO",addhabitbtn.hasAttribute("style"))
-
 	expect(addhabitbtn.hasAttribute("style")).toBe(true)
 })
 
 
 it('"modal" has data-toggle', ()=>{	
 	const addhabitbtn = document.querySelector('#firstaddhabit')
-
-	console.log("BBdsdasdasdasdasBOOOOOO",addhabitbtn.hasAttribute("data-toggle"))
-
 	expect(addhabitbtn.hasAttribute("data-toggle")).toBe(true)
 })
+
+
+
+//a blank one
+// it.only('...', ()=>{	
+// 	const addhabitbtn = document.querySelector('#firstaddhabit')
+// 	expect(addhabitbtn.hasAttribute("data-toggle")).toBe(true)
+// })
