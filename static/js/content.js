@@ -54,6 +54,7 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
                     
                     if(currentN == goalN){
                         field.setAttribute('disabled', '')
+                        goalStreakText += 1
                     } 
                     else{
                         plusClicked(e, habitID)
@@ -134,6 +135,7 @@ deleteHabitBtn.addEventListener('click', (e)=>{
 addHabitBtn.addEventListener('click', (e)=>{
     e.preventDefault()
 
+
     const habitName = document.querySelector('#habitName').value
 
     document.querySelector('#habitName').value = ''
@@ -148,10 +150,13 @@ addHabitBtn.addEventListener('click', (e)=>{
     let currentdate = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
     
     if(habitName == '' || amount == '' || frequency == 'Frequency'){
-        alert('Fill all fields pls')
+        alert('All fields required')
     }else{   
         addHabit(habitName, frequency, amount, currentdate)
     }
+
+
+
     // console.log(e.params.habitName, e.params.frequency, e.params.amount)
 
     //We have to pass the form data in here 
@@ -189,10 +194,13 @@ function modalUpdate(habitID, goalStreakText, currentN, goalN){
 
 
 
-
+const spinLoad = document.querySelector('#spinLoad')
 
 
 function refreshPage(){
+
+    spinLoad.style.display = 'inline-block'
+
     divToAppend.innerHTML = ''
 
     // get user id from local storage
@@ -203,7 +211,12 @@ function refreshPage(){
     //fetch request to the server
     const data = fetchGetHabitsByUser(userId)
 
+    
+
+    
+    
     data.then((d)=>{
+
 
         if(d.habits.length > 0){
         d.habits.forEach((o)=>{
@@ -212,10 +225,12 @@ function refreshPage(){
         }else{
             alert('You have no habits, add a habit!')
         }
+        
+        spinLoad.style.display = 'none'
     })
-    
 
-    console.log('the page was refreshed')
+
+
 }
 
 
@@ -239,3 +254,4 @@ logoutBtn.addEventListener('click', ()=>{
 
 
 refreshPage()
+

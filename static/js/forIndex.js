@@ -39,13 +39,16 @@ loginBtn.addEventListener('click', e=>{
 signupBtn.addEventListener('click', e=>{
     e.preventDefault()
 
+
     const responseRegistration = fetchCreateUser(userName.value, password.value)
 
     console.log('Signup clicked')
 
+
     responseRegistration.then((i)=>{
 
         console.log(i)
+
 
         if(i == '{"msg":"Username taken"}'){
             alert('Please choose another username!')
@@ -55,6 +58,7 @@ signupBtn.addEventListener('click', e=>{
     })
 
     password.value = ''
+
 
     // popup!
 })
