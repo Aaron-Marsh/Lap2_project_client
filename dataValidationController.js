@@ -46,16 +46,18 @@ form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
 // ="10" min="1" required
 
 
-
+console.log(document.querySelector('#frequency').value)
 
 async function entered() {
     checkHabitNameField()
     checkAmountField()
     
-    if (checkAmountField()===true && checkHabitNameField()) {
+    if (checkAmountField()===true && checkHabitNameField() && document.querySelector('#frequency').value !== 'Frequency') {
+        
         console.log("BUTTON ON!")
         btn_AddHabit.removeAttribute("disabled","");
         btn_AddHabit.style.background="#0093AB"
+
     }
     else {
         console.log("BUTTON off")
