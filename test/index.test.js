@@ -160,7 +160,7 @@ it('favicon script is not blank', ()=>{
 // class vs att
 
 
-it.only('"modal" is hidden at start', ()=>{	
+it.only('"modal" has a style attribute', ()=>{	
 	const addhabitbtn = document.querySelector('#firstaddhabit')
 
 	console.log("BBdsdasdasdasdasBOOOOOO",addhabitbtn.hasAttribute("style"))
@@ -168,3 +168,11 @@ it.only('"modal" is hidden at start', ()=>{
 	expect(addhabitbtn.hasAttribute("style")).toBe(true)
 })
 
+
+it('"modal" has data-toggle', ()=>{	
+	const addhabitbtn = document.querySelector('#firstaddhabit')
+
+	console.log("BBdsdasdasdasdasBOOOOOO",addhabitbtn.hasAttribute("data-toggle"))
+
+	expect(addhabitbtn.hasAttribute("data-toggle")).toBe(true)
+})
