@@ -10,13 +10,29 @@ const divToAppend = document.querySelector('#divToAppend')
 // In here we can actually pass other parameters so to feed the main button event listener when it refers to the modal!!
 //////////////////////////////////////////////////////////////////
 
-function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
+function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, frequencyText){
     //Target div to append and remove content
 
+    let variable = ''
+
+    switch (frequencyText) {
+        case 'Daily':
+            variable = ' btn-success'
+            break;
+
+        case 'Weekly':
+            variable = ' btn-info'
+            break;
+    
+        default:
+            variable = ' btn-primary'
+            break;
+    }
+
     const fields = [
-        {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0'}},
-        {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0 w-100', 'data-toggle': "modal", 'data-target': "#trackHabit"}},
-        {tag: 'button', value: '+', attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0'}},
+        {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 shadow-none' + variable}},
+        {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 w-100 shadow-none' + variable, 'data-toggle': "modal", 'data-target': "#trackHabit"}},
+        {tag: 'button', value: '+', attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 shadow-none' + variable}},
     ]
 
     //declare main div here 
@@ -32,6 +48,8 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
 
             mainDiv.appendChild(field)
         })
+
+
 
         field.textContent = f.value
     
@@ -220,7 +238,8 @@ function refreshPage(){
 
         if(d.habits.length > 0){
         d.habits.forEach((o)=>{
-            createDivHabit(o.title, o.id, o.streak, o.current, o.goal)
+            console.log(o)
+            createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
         })
         }else{
             alert('You have no habits, add a habit!')
