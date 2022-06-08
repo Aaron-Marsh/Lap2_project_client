@@ -183,7 +183,7 @@ function refreshPage(){
 
     data.then((d)=>{
         d.habits.forEach((o)=>{
-            createDivHabit(o.title, o.id, o.frequency, o.current, o.goal)
+            createDivHabit(o.title, o.id, o.streak, o.current, o.goal)
         })
     })
     
