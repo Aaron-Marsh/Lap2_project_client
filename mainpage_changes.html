@@ -24,40 +24,45 @@
         <title>Rabbit Habits</title>
     </head>
 <body>
-    
-    <div class="d-flex p-3">
-        <img src="./imgs/logo.png" class="img-fluid" alt="rabbit habit logo" width="100">
+  <div class="container text-end">
+  <button class="btn-sm btn-primary text-white rounded border-0 mt-1" type="button" style="font-size: 12px;" id="logoutBtn">LogOut</button>    
+</div>  
+  <div class="d-flex px-3 justify-content-center">
+        <img src="./imgs/logo.png" class="img-fluid" alt="rabbit habit logo" width="90">
         <h1 class="text-primary pt-3 mt-2" style="font-size: 40px;">Rabbit Habits!</h1>
     </div>
 
-    <div class="container btn-group">
+    <div class="container-fluid btn-group justify-content-center">
         <div>
-            <div class="row text-center pt-5 px-4" id="divToAppend">
-                    
-                    <div class="btn-group">
-                    <button class="btn btn-primary text-white mt-3 border-0 " type="button" style="font-size: 25px;" id="minusBtn">-</button>
-                    <button class="btn btn-primary text-white mt-3 border-0 w-100" type="button" style="font-size: 25px;" data-toggle="modal" data-target="#trackHabit">5 a day</button>
-                    <button class="btn btn-primary text-white mt-3 border-0" type="button" style="font-size: 25px;" id="plusBtn">+</button>
-                    </div>
-
-                    
+            <div class="row text-center pt-5 " id="divToAppend">
             </div>
 
-            <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " id="firstaddhabit" type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;" >Add habit!</button>  
-            <button class="btn btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" style="font-size: 25px;" id="logoutBtn">LogOut</button>    
+
+            <button class="btn-lg btn-primary text-white mt-3 rounded border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;" >Add habit!</button>  
+            
+
         </div>
 
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
               <div class="modal-content rounded-pill">
-                <div class="modal-header justify-content-center  border-0">
+                <div class="modal-header justify-content-center border-0">
                   <h5 class="modal-title text-center mt-3" id="exampleModalCenterTitle">Make a Habit of it!</h5>
                   </button>
                 </div>
                 <div class="modal-body px-5">
-                <div class="row">
+                <div class="row form-group">
                   <input class="text-center mt-1 rounded-pill" type="text" name="habitName" id="habitName" placeholder="Habit name">
-                  <input class="text-center mt-3 rounded-pill" type="text" name="frequency" id="frequency" placeholder="Frequency">
+                  <!-- <input class="text-center mt-3 rounded-pill" type="text" name="frequency" id="frequency" placeholder="Frequency"> -->
+          
+                    <select class="selectpicker text-center mt-3 rounded-pill " name="frequency" id="frequency">
+                      <option selected>Frequency</option>
+                      <option>daily</option>
+                      <option>weekly</option>
+                      <option>monthly</option>
+                    </select>
+                    
+           
                   <input class="text-center mt-3 rounded-pill" type="text" name="amount" id="amount" placeholder="Amount">
                 </div>
                 </div>

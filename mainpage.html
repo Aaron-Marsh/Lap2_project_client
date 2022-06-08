@@ -33,30 +33,24 @@
         <h1 class="text-primary pt-3 mt-2" style="font-size: 40px;">Rabbit Habits!</h1>
     </div>
 
-    <div class="container btn-group">
-        <div class="row text-center pt-5 px-4">
-                <div class=" d-flex flex-row" >
-                <button class="btn-lg btn-primary text-white mt-3 rounded-circle border-0 me-1" type="button" style="font-size: 25px;">-</button>
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">Brush Teeth</button>
-                <button class="btn-lg btn-primary text-white mt-3 rounded-circle border-0 ms-1" type="button" style="font-size: 25px;">+</button>
+    <div class="container justify-content-center ">
+        <div class="row text-center pt-5 px-3 ">
+
                 
-                </div>
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100" type="button" data-toggle="modal" data-target="#trackHabit" style="font-size: 25px; ">Drink Water</button>
-                
-                <div class="btn-group">
-                <button class="btn btn-primary text-white mt-3 border-0 " type="button" style="font-size: 25px;">-</button>
-                <button class="btn btn-primary text-white mt-3 border-0 w-100" type="button" style="font-size: 25px;">5 a day</button>
-                <button class="btn btn-primary text-white mt-3 border-0" type="button" style="font-size: 25px;">+</button>
-                </div>
+         
+          <div class="btn-group p-0">
+            <button class="btn btn-primary text-white rounded-start border-0 position-fixed " type="button" style="font-size: 25px;">+</button>
+            <button class="btn btn-primary text-white  border-0 w-100 position-absolute" type="button" style="font-size: 25px;">5 day</button>
+            <button class="btn btn-primary text-white rounded-end border-0 position-fixed" type="button" style="font-size: 25px;">-</button>                  
+          </div>
+          <div class="progress-bar rounded position-absolute opacity-50 rounded-pill"  role="progressbar" style="width: 75%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">70</div>
+     
 
-                <button class="btn-lg btn-secondary text-white  mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">Call Family</button>
+    
 
-                <button class="btn-lg btn-secondary text-white mt-3 rounded-pill border-0 w-100" type="button" style="font-size: 25px;">5km Jog</button>
+                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 fixed-bottom " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;">Add habit!</button>
 
-                <button class="btn-lg btn-primary text-white mt-3 rounded-pill border-0 w-100 " type="button" data-toggle="modal" data-target="#exampleModalCenter" style="font-size: 25px;">Add habit!</button>
-
-        </div>
-
+  
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered " role="document">
               <div class="modal-content rounded-pill">
