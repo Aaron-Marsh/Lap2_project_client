@@ -199,9 +199,14 @@ function refreshPage(){
     const data = fetchGetHabitsByUser(userId)
 
     data.then((d)=>{
+
+        if(d.habits.length > 0){
         d.habits.forEach((o)=>{
             createDivHabit(o.title, o.id, o.streak, o.current, o.goal)
         })
+        }else{
+            alert('You have no habits, add a habit!')
+        }
     })
     
 

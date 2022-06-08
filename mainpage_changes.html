@@ -52,10 +52,10 @@
                 </div>
                 <div class="modal-body px-5">
                 <div class="row text-center">
-                  <input class="text-center mt-1 rounded-pill" type="text" name="habitName" id="habitName" placeholder="Habit name">
+                  <input class="text-center mt-1 rounded-pill" type="text" name="habitName" id="habitName" placeholder="Habit name" required>
                   <!-- <input class="text-center mt-3 rounded-pill" type="text" name="frequency" id="frequency" placeholder="Frequency"> -->
           
-                    <select class="selectpicker text-center mt-3 rounded-pill " name="frequency" id="frequency">
+                    <select class="selectpicker text-center mt-3 rounded-pill " name="frequency" id="frequency"  required>
                       <option selected>Frequency</option>
                       <option>Daily</option>
                       <option>Weekly</option>
@@ -63,7 +63,7 @@
                     </select>
                     
            
-                  <input class="text-center mt-3 rounded-pill" type="text" name="amount" id="amount" placeholder="Amount">
+                  <input class="text-center mt-3 rounded-pill" type="number" name="amount" id="amount" placeholder="Amount" maxlength="3" required>
                 </div>
                 </div>
 

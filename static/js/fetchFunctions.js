@@ -119,7 +119,6 @@ async function fetchCreateUser(username, password){
             body: JSON.stringify(habitData) 
           })
         const data = await response.text()
-        console.log(data)
         return data
 
     }catch(err){
