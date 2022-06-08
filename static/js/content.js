@@ -135,10 +135,11 @@ addHabitBtn.addEventListener('click', (e)=>{
     e.preventDefault()
 
     const habitName = document.querySelector('#habitName').value
+
     document.querySelector('#habitName').value = ''
 
     const frequency = document.querySelector('#frequency').value
-    document.querySelector('#frequency').value = ''
+    document.querySelector('#frequency').value = 'Frequency'
 
     const amount = document.querySelector('#amount').value
     document.querySelector('#amount').value = ''
@@ -146,7 +147,11 @@ addHabitBtn.addEventListener('click', (e)=>{
     let today = new Date;
     let currentdate = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
     
-    addHabit(habitName, frequency, amount, currentdate)
+    if(habitName == '' || amount == '' || frequency == 'Frequency'){
+        alert('Fill all fields pls')
+    }else{   
+        addHabit(habitName, frequency, amount, currentdate)
+    }
     // console.log(e.params.habitName, e.params.frequency, e.params.amount)
 
     //We have to pass the form data in here 
