@@ -56,6 +56,9 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
         // switch statement to add event listener based on f.value
         switch(f.value){
             case '-':
+                if(currentN == 0 || currentN == goalN){
+                    field.setAttribute('disabled', '')
+                }
                 field.addEventListener('click', e=>{
 
                     if(currentN == 0 || currentN == goalN){
@@ -68,11 +71,20 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
                 })
                 break;
             case '+':
+                if(currentN == goalN){
+                    field.setAttribute('disabled', '')
+                }
                 field.addEventListener('click', e=>{
                     
-                    if(currentN == goalN){
+                    if(currentN == goalN -1 ){
                         field.setAttribute('disabled', '')
+                        field.parentNode.firstChild.setAttribute('disabled', '')
                         goalStreakText += 1
+                        plusClicked(e, habitID)
+                        currentN += 1
+
+                        field.previousElementSibling.className = 'btn btn-secondary text-white mt-3 border-0 w-100 shadow-none'
+
                     } 
                     else{
                         plusClicked(e, habitID)
@@ -86,6 +98,9 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
                 })
                 break;
             default:
+                if(currentN == goalN){
+                    field.className = 'btn btn-secondary text-white mt-3 border-0 w-100 shadow-none'
+                }
                 field.addEventListener('click', e=>{
                     // In here you can pass way more stuff so to do it once 
 
@@ -240,7 +255,6 @@ function refreshPage(){
             const newHabits = orderArray(d.habits)
 
             newHabits.forEach((o)=>{
-            console.log(o)
             createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
         })
         }else{
