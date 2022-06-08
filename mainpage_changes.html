@@ -20,6 +20,7 @@
 
         <script src="static/js/content.js" type="module" defer></script>
         <script src="static/js/fetchFunctions.js"></script>
+        <script src="dataValidationController.js" defer></script>
         
         <title>Rabbit Habits</title>
     </head>
@@ -52,7 +53,7 @@
                 </div>
                 <div class="modal-body px-5">
                 <div class="row text-center">
-                  <input class="text-center mt-1 rounded-pill" type="text" name="habitName" id="habitName" placeholder="Habit name">
+                  <input class="text-center mt-1 rounded-pill" type="text"  name="habitName" id="habitName" placeholder="Habit name" required>
                   <!-- <input class="text-center mt-3 rounded-pill" type="text" name="frequency" id="frequency" placeholder="Frequency"> -->
           
                     <select class="selectpicker text-center mt-3 rounded-pill " name="frequency" id="frequency">
@@ -63,12 +64,12 @@
                     </select>
                     
            
-                  <input class="text-center mt-3 rounded-pill" type="text" name="amount" id="amount" placeholder="Amount">
+                  <input class="text-center mt-3 rounded-pill" type="number" name="amount" id="amount"  placeholder="Amount"  required>
                 </div>
                 </div>
 
                 <div class="modal-footer border-0 justify-content-center">
-                  <button type="button" class="btn btn-primary text-white mb-3" id="addHabitBtn" data-dismiss="modal">Add Habit</button>
+                  <button type="button" class="btn btn-primary text-white mb-3 disable" id="addHabitBtn" data-dismiss="modal">Add Habit</button>
                   <!-- <button type="button" class="btn btn-secondary text-white" data-dismiss="modal">Close</button> -->
                 </div>
               </div>
