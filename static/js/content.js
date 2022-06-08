@@ -10,13 +10,29 @@ const divToAppend = document.querySelector('#divToAppend')
 // In here we can actually pass other parameters so to feed the main button event listener when it refers to the modal!!
 //////////////////////////////////////////////////////////////////
 
-function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
+function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, frequencyText){
     //Target div to append and remove content
 
+    let variable = ''
+
+    switch (frequencyText) {
+        case 'Daily':
+            variable = ' btn-success'
+            break;
+
+        case 'Weekly':
+            variable = ' btn-info'
+            break;
+    
+        default:
+            variable = ' btn-primary'
+            break;
+    }
+
     const fields = [
-        {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0'}},
-        {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0 w-100', 'data-toggle': "modal", 'data-target': "#trackHabit"}},
-        {tag: 'button', value: '+', attributes: {type: 'button', style:'font-size: 25px;', class: 'btn btn-primary text-white mt-3 border-0'}},
+        {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 shadow-none' + variable}},
+        {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 w-100 shadow-none' + variable, 'data-toggle': "modal", 'data-target': "#trackHabit"}},
+        {tag: 'button', value: '+', attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 shadow-none' + variable}},
     ]
 
     //declare main div here 
@@ -33,29 +49,64 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN){
             mainDiv.appendChild(field)
         })
 
+
+
         field.textContent = f.value
     
         // switch statement to add event listener based on f.value
         switch(f.value){
             case '-':
+                if(currentN == 0 || currentN == goalN){
+                    field.setAttribute('disabled', '')
+                }
                 field.addEventListener('click', e=>{
-                    minusClicked(e, habitID)
-                    currentN -= 1
+
+                    if(currentN == 0 || currentN == goalN){
+                        field.setAttribute('disabled', '')
+                    }else{
+                        minusClicked(e, habitID)
+                        currentN -= 1
+                    }
+
                 })
                 break;
             case '+':
+                if(currentN == goalN){
+                    field.setAttribute('disabled', '')
+                }
                 field.addEventListener('click', e=>{
-                    plusClicked(e, habitID)
-                    currentN += 1
+                    
+                    if(currentN == goalN -1 ){
+                        field.setAttribute('disabled', '')
+                        field.parentNode.firstChild.setAttribute('disabled', '')
+                        goalStreakText += 1
+                        plusClicked(e, habitID)
+                        currentN += 1
+
+                        field.previousElementSibling.className = 'btn btn-secondary text-white mt-3 border-0 w-100 shadow-none'
+
+                    } 
+                    else{
+                        plusClicked(e, habitID)
+                        currentN += 1
+                    }
+                    
+                    if(currentN != 0 && currentN != goalN){
+                        field.parentNode.firstChild.removeAttribute('disabled')
+                    }       
+                    
                 })
                 break;
             default:
+                if(currentN == goalN){
+                    field.className = 'btn btn-secondary text-white mt-3 border-0 w-100 shadow-none'
+                }
                 field.addEventListener('click', e=>{
                     // In here you can pass way more stuff so to do it once 
 
                     mainClicked(e, habitID, goalStreakText, currentN, goalN)
                 })
-        }        
+        } 
     })
 
     divToAppend.appendChild(mainDiv)
@@ -117,11 +168,13 @@ deleteHabitBtn.addEventListener('click', (e)=>{
 addHabitBtn.addEventListener('click', (e)=>{
     e.preventDefault()
 
+
     const habitName = document.querySelector('#habitName').value
+
     document.querySelector('#habitName').value = ''
 
     const frequency = document.querySelector('#frequency').value
-    document.querySelector('#frequency').value = ''
+    document.querySelector('#frequency').value = 'Frequency'
 
     const amount = document.querySelector('#amount').value
     document.querySelector('#amount').value = ''
@@ -129,7 +182,14 @@ addHabitBtn.addEventListener('click', (e)=>{
     let today = new Date;
     let currentdate = `${today.getDate()}-${today.getMonth()+1}-${today.getFullYear()}`;
     
-    addHabit(habitName, frequency, amount, currentdate)
+    if(habitName == '' || amount == '' || frequency == 'Frequency'){
+        alert('All fields required')
+    }else{   
+        addHabit(habitName, frequency, amount, currentdate)
+    }
+
+
+
     // console.log(e.params.habitName, e.params.frequency, e.params.amount)
 
     //We have to pass the form data in here 
@@ -167,10 +227,13 @@ function modalUpdate(habitID, goalStreakText, currentN, goalN){
 
 
 
-
+const spinLoad = document.querySelector('#spinLoad')
 
 
 function refreshPage(){
+
+    spinLoad.style.display = 'inline-block'
+
     divToAppend.innerHTML = ''
 
     // get user id from local storage
@@ -181,17 +244,57 @@ function refreshPage(){
     //fetch request to the server
     const data = fetchGetHabitsByUser(userId)
 
-    data.then((d)=>{
-        d.habits.forEach((o)=>{
-            createDivHabit(o.title, o.id, o.streak, o.current, o.goal)
-        })
-    })
     
 
-    console.log('the page was refreshed')
+    
+    
+    data.then((d)=>{
+
+
+        if(d.habits.length > 0){
+            const newHabits = orderArray(d.habits)
+
+            newHabits.forEach((o)=>{
+            createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
+        })
+        }else{
+            alert('You have no habits, add a habit!')
+        }
+        
+        spinLoad.style.display = 'none'
+    })
+
+
+
 }
 
 
+
+function orderArray(array){
+
+    let newArray = []
+
+    array.forEach(e => {
+        if(e.frequency == 'Daily'){ //e.frequency
+            newArray.push(e)
+        }
+    });
+
+    array.forEach(e => {
+        if(e.frequency == 'Weekly'){ //e.frequency
+            newArray.push(e)
+        }
+    });
+
+    array.forEach(e => {
+        if(e.frequency == 'Monthly'){ //e.frequency
+            newArray.push(e)
+        }
+    });
+
+    return newArray
+
+}
 
 
 
@@ -212,3 +315,4 @@ logoutBtn.addEventListener('click', ()=>{
 
 
 refreshPage()
+
