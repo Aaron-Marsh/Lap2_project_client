@@ -53,18 +53,25 @@
                 </div>
                 <div class="modal-body px-5">
                 <div class="row text-center">
-                  <input class="text-center mt-1 rounded-pill" type="text"  name="habitName" id="habitName" placeholder="Habit name" required>
+                  
+
+                  <label for="habitName" id="label_issue_habitname" class="col-sm-2">
+                    <span class="h12 small  ">Habit name must be longer than 3 letters</span> 
+                  </label>
+                  <input class="text-center mt-1 rounded-pill" type="text"  name="habitName" oninput="entered()" id="habitName" placeholder="Habit name" required>
                   <!-- <input class="text-center mt-3 rounded-pill" type="text" name="frequency" id="frequency" placeholder="Frequency"> -->
-          
-                    <select class="selectpicker text-center mt-3 rounded-pill " name="frequency" id="frequency">
+                  
+                    <select class="selectpicker text-center mt-3 rounded-pill "  name="frequency" id="frequency" >
                       <option selected>Frequency</option>
                       <option>Daily</option>
                       <option>Weekly</option>
                       <option>Monthly</option>
                     </select>
-                    
-           
-                  <input class="text-center mt-3 rounded-pill" type="number" name="amount" id="amount"  placeholder="Amount"  required>
+
+                  <input class="text-center mt-3 rounded-pill"  type="number" oninput="entered()" name="amount" id="amount"  placeholder="Amount" required>
+                  <label for="amount" id="label_issue_amount" class="col-sm-2">
+                    <span class="h12 small  ">Amount must be between 1-99</span> 
+                  </label>
                 </div>
                 </div>
 
