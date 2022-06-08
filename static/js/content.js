@@ -237,7 +237,9 @@ function refreshPage(){
 
 
         if(d.habits.length > 0){
-        d.habits.forEach((o)=>{
+            const newHabits = orderArray(d.habits)
+
+            newHabits.forEach((o)=>{
             console.log(o)
             createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
         })
@@ -253,6 +255,32 @@ function refreshPage(){
 }
 
 
+
+function orderArray(array){
+
+    let newArray = []
+
+    array.forEach(e => {
+        if(e.frequency == 'Daily'){ //e.frequency
+            newArray.push(e)
+        }
+    });
+
+    array.forEach(e => {
+        if(e.frequency == 'Weekly'){ //e.frequency
+            newArray.push(e)
+        }
+    });
+
+    array.forEach(e => {
+        if(e.frequency == 'Monthly'){ //e.frequency
+            newArray.push(e)
+        }
+    });
+
+    return newArray
+
+}
 
 
 
