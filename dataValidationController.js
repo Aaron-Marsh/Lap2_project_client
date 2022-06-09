@@ -47,12 +47,7 @@ function SetUpDataVal() {
 
 SetUpDataVal()
 
-
-
-
-
-
-async function entered() {
+async function CheckFormData() {
     checkHabitNameField()
     checkAmountField()
     
