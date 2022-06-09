@@ -122,3 +122,5 @@ function checkAmountField (){
         return true
     }
 }
+
+module.exports = {entered, checkHabitNameField, checkAmountField}

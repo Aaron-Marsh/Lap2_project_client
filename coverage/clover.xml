@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1654784812098" clover="3.2.0">
+  <project timestamp="1654784812098" name="All files">
+    <metrics statements="58" coveredstatements="36" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="7" elements="67" coveredelements="43" complexity="0" loc="58" ncloc="58" packages="2" files="2" classes="2"/>
+    <package name="static.js">
+      <metrics statements="48" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
+      <file name="fetchFunctions.js" path="/Users/billie/Documents/Auguste/Lap-2/lap2-project/Lap2_project_client/static/js/fetchFunctions.js">
+        <metrics statements="48" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="4"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="108" count="0" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="110" count="0" type="stmt"/>
+        <line num="114" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="143" count="0" type="stmt"/>
+        <line num="147" count="0" type="stmt"/>
+        <line num="154" count="0" type="stmt"/>
+        <line num="156" count="0" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="163" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="180" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="test">
+      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="helpers.js" path="/Users/billie/Documents/Auguste/Lap-2/lap2-project/Lap2_project_client/test/helpers.js">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

@@ -1,3 +1,131 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+//These are the contraints on the modal popup form
+
+///////////////////////////////////////////////////
+//set up vars:
+///////////////////////////////////////////////////
+
+//Character Contraints -VALUES
+const maxLen_HabbitName = 10
+const minLen_HabbitName = 2
+
+const minLen_addAmount = 1  //min = 0
+const maxLen_addAmount = 2  //max = 99
+
+
+//HTML Elements
+const form_HabbitName = document.getElementById ("habitName")
+const form_AddAmount = document.getElementById ("amount")
+
+const issue_HabbitName = document.getElementById ("label_issue_habitname")
+const issue_Amount = document.getElementById ("label_issue_amount")
+
+
+const btn_AddHabit = document.getElementById ("addHabitBtn","")
+
+btn_AddHabit.setAttribute("disabled","");
+btn_AddHabit.style.background="gray"
+
+// issue_HabbitName.style.display="none"
+issue_HabbitName.style.color="red"
+issue_HabbitName.style.visibility="hidden"
+
+issue_Amount.style.color="red"
+issue_Amount.style.visibility="hidden"
+
+
+///////////////////////////////////////////////////
+//HTML contraints
+///////////////////////////////////////////////////
+
+
+//HABIT NAME - contraints
+form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
+
+//AMOUNT range limit
+// form_AddAmount.setAttribute("max", "2");
+// ="10" min="1" required
+
+
+console.log(document.querySelector('#frequency').value)
+
+async function entered() {
+    checkHabitNameField()
+    checkAmountField()
+    
+    if (checkAmountField()===true && checkHabitNameField() && document.querySelector('#frequency').value !== 'Frequency') {
+        
+        console.log("BUTTON ON!")
+        btn_AddHabit.removeAttribute("disabled","");
+        btn_AddHabit.style.background="#0093AB"
+
+    }
+    else {
+        console.log("BUTTON off")
+        btn_AddHabit.setAttribute("disabled","");
+        btn_AddHabit.style.background="gray"
+    }
+}
+
+
+
+
+function checkHabitNameField() { 
+    console.log("CHECKING THIS") 
+    if (form_HabbitName.value.length === 0 ){
+        form_HabbitName.style.background="white"
+         console.log ("habit name is empty again")
+         issue_HabbitName.style.visibility="hidden"
+
+         return false
+    }
+    else if (form_HabbitName.value.length <= 2) {
+        console.log("name's too short,", form_HabbitName.value)
+        // form_HabbitName.style.background="red"
+        form_HabbitName.style.color="red"
+        // form_HabbitName.classList.add("border-danger")
+        issue_HabbitName.style.visibility="visible"
+        
+        return false
+    }
+    if (form_HabbitName.value.length >= 3) {
+        console.log("name's too short,", form_HabbitName.value)
+        form_HabbitName.style.color="black"
+        issue_HabbitName.style.visibility="hidden"
+        return true
+    }    
+}
+
+function checkAmountField (){
+    
+    let checkAmount = form_AddAmount.value
+    
+    console.log("form_AddAmount.value", form_AddAmount.value)
+    if (form_AddAmount.value.length === 0 ){
+    //    form_AddAmount.style.background="white"
+        form_AddAmount.style.color="black"
+        issue_Amount.style.visibility="hidden"
+        console.log ("AMOUNT is empty again")
+        return false
+    }
+    else if (checkAmount > 99  || checkAmount <= "0"  ) {
+        // form_AddAmount.style.background="red"
+        console.log("AMOUNT too high or too low!")
+        form_AddAmount.style.color="red"
+        issue_Amount.style.visibility="visible"
+        return false
+    }
+    else{
+        // form_AddAmount.style.background="white"
+        form_AddAmount.style.color="black"
+        console.log ("AMOUNT is valid")
+        issue_Amount.style.visibility="hidden"
+        return true
+    }
+}
+
+module.exports = {entered, checkHabitNameField, checkAmountField}
+},{}],2:[function(require,module,exports){
 // This part of JS contains functions to render the page content
 
 // We have to decide with Billie if we want to do this creating elements and looping through them in JS or if we want to use EJS and work from the HTML. 
@@ -264,11 +392,11 @@ function refreshPage(){
 
 
         if(d.habits.length > 0){
-            const newHabits = orderArray(d.habits)
+            // const newHabits = orderArray(d.habits)
 
-            newHabits.forEach((o)=>{
+            // newHabits.forEach((o)=>{
             createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
-         })
+        // }
         }else{
             alert('You have no habits, add a habit!')
         }
@@ -329,3 +457,185 @@ logoutBtn.addEventListener('click', ()=>{
 refreshPage()
 
 module.exports = {createDivHabit, minusClicked, plusClicked, mainClicked, addHabit, modalUpdate, refreshPage, orderArray}
+},{"../../dataValidationController":1,"./fetchFunctions":3}],3:[function(require,module,exports){
+
+const heroku_url = 'https://glacial-plains-13166.herokuapp.com'
+
+async function fetchGetHabitsByUser(userId){
+    try{
+        let url = `${heroku_url}/habits/user/${userId}`
+        const response = await fetch(url)
+        const data = await response.json()
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// const dataAaron = fetchGetHabitsByUser('Aaron')
+
+// dataAaron.then((d)=>{
+//     console.log(d)
+// })
+
+
+
+
+
+async function fetchDeleteHabit(habitId){
+    try{
+        let url = `${heroku_url}/habits/${habitId}`
+        const response = await fetch(url, {
+            method: 'DELETE', 
+        })
+        const data = await response.text()
+        return 'Habit was deleted'
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// console.log(fetchDeleteHabit('629f2322f6598ab936693fb3'))
+
+
+async function fetchCreateHabit(title, frequency, goal, date, userId){
+    try{
+        let url = `${heroku_url}/habits/new`
+        const habitData = {
+            "title": title,
+            "frequency": frequency,
+            "goal": goal,
+            "startdate": date,
+            "userId": userId
+        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        console.log(data)
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// const newHabit = fetchCreateHabit('Different habit from fetch', 'daily', 6, '22-12-10', 'Aaron')
+
+// console.log(newHabit)
+
+
+
+
+
+
+async function fetchPatchHabit(habitId, command){
+    try{
+        let url = `${heroku_url}/habits/${habitId}`
+        const habitData = {
+            "id": habitId,
+            "command": command
+        }
+        const response = await fetch(url, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        console.log(data)
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// const patchHabit = fetchPatchHabit('629dd294da9aff4209426a5d', -1)
+
+// console.log(patchHabit)
+
+
+
+async function fetchCreateUser(username, password){
+    try{
+        let url = `${heroku_url}/auth/register`
+        const habitData = {
+            "username": username,
+            "password": password
+        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.text()
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// const newUser = fetchCreateUser('Gio', 'pass')
+// console.log(newUser)
+
+
+
+
+
+
+
+//Logs in and sets local storage for userid and username, changes location.hash to mainpage
+
+async function fetchLogin(username, password){
+    try{
+        let url = `${heroku_url}/auth/login`
+        const habitData = {
+            "username": username,
+            "password": password
+        }
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(habitData) 
+          })
+        const data = await response.json()
+
+        console.log(data.userId)
+
+        localStorage.setItem('userid', data.userId);
+        localStorage.setItem('username', data.username);
+
+        location.hash = '#mainpage'
+
+        return data
+
+    }catch(err){
+        return({message: err.message})
+    }
+}
+
+// const loginExample = fetchLogin('Gio', 'pass')
+
+// loginExample.then((data)=>{
+//     const {username, userId, prevDate} = data
+//     console.log( username,userId,prevDate)
+// })
+
+
+// console.log('localstorage=' + localStorage.getItem('userid'))
+
+module.exports = {fetchGetHabitsByUser,fetchDeleteHabit,fetchCreateHabit,fetchPatchHabit, fetchCreateUser,fetchLogin}
+},{}]},{},[2]);

@@ -177,4 +177,4 @@ async function fetchLogin(username, password){
 
 // console.log('localstorage=' + localStorage.getItem('userid'))
 
-
+module.exports = {fetchGetHabitsByUser,fetchDeleteHabit,fetchCreateHabit,fetchPatchHabit, fetchCreateUser,fetchLogin}

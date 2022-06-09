@@ -1,3 +1,4 @@
+const {fetchCreateUser, fetchLogin} = require('./fetchFunctions')
 
 const userName = document.querySelector('#exampleInputUsername')
 const password = document.querySelector('#exampleInputPassword1')
@@ -62,3 +63,5 @@ signupBtn.addEventListener('click', e=>{
 
     // popup!
 })
+
+module.exports = {fetchCreateUser}

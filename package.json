@@ -5,8 +5,16 @@
   "main": "index.js",
   "scripts": {
     "sass-dev": "sass --watch --update --style=expanded ./style/custom.scss:./style/custom.css",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll ",
+    "coverage": "jest --coverage",
+    "bundle": "watchify ./static/js/content.js -o bundle.js"
+    
   },
+  
+    "jest": {
+      "verbose": true,
+      "testURL": "http://localhost/"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Aaron-Marsh/Lap2_project_client.git"
@@ -23,6 +31,8 @@
   },
   "devDependencies": {
     "jest": "^28.1.1",
-    "jest-environment-jsdom": "^28.1.1"
+    "jest-environment-jsdom": "^28.1.1",
+    "jest-fetch-mock": "^3.0.3",
+    "watchify": "^4.0.0"
   }
 }
