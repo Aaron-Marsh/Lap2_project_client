@@ -2,7 +2,7 @@
 
 // We have to decide with Billie if we want to do this creating elements and looping through them in JS or if we want to use EJS and work from the HTML. 
 
-
+const hexCompletedColour = '#9FC088'
 
 const divToAppend = document.querySelector('#divToAppend')
 
@@ -31,7 +31,7 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
 
     const fields = [
         {tag: 'button', value: '-',attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 shadow-none' + variable}},
-        {tag: 'button', value: habitText, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 w-100 shadow-none' + variable, 'data-toggle': "modal", 'data-target': "#trackHabit"}},
+        {tag: 'button', value: `${habitText} ${currentN}/${goalN}`, attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 w-100 shadow-none' + variable, 'data-toggle': "modal", 'data-target': "#trackHabit"}},
         {tag: 'button', value: '+', attributes: {type: 'button', style:'font-size: 25px;', class: 'btn text-white mt-3 border-0 shadow-none' + variable}},
     ]
 
@@ -66,6 +66,7 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
                     }else{
                         minusClicked(e, habitID)
                         currentN -= 1
+                        field.nextElementSibling.textContent = `${habitText} ${currentN}/${goalN}`
                     }
 
                 })
@@ -83,24 +84,30 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
                         plusClicked(e, habitID)
                         currentN += 1
 
-                        field.previousElementSibling.className = 'btn btn-secondary text-white mt-3 border-0 w-100 shadow-none'
+                        field.previousElementSibling.style.background = hexCompletedColour
+
+                        field.previousElementSibling.textContent = `${habitText} ${currentN}/${goalN}`
 
                     } 
                     else{
                         plusClicked(e, habitID)
                         currentN += 1
+                        field.previousElementSibling.textContent = `${habitText} ${currentN}/${goalN}`
                     }
                     
                     if(currentN != 0 && currentN != goalN){
                         field.parentNode.firstChild.removeAttribute('disabled')
-                    }       
+                    }
+                    
                     
                 })
                 break;
             default:
                 if(currentN == goalN){
-                    field.className = 'btn btn-secondary text-white mt-3 border-0 w-100 shadow-none'
-                }
+                    field.style.background = hexCompletedColour
+                }   
+
+
                 field.addEventListener('click', e=>{
                     // In here you can pass way more stuff so to do it once 
 
