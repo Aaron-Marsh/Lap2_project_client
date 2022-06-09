@@ -2,7 +2,7 @@
 
 // We have to decide with Billie if we want to do this creating elements and looping through them in JS or if we want to use EJS and work from the HTML. 
 
-const hexCompletedColour = '#9FC088'
+const hexCompletedColour = '#8FD694'
 
 const divToAppend = document.querySelector('#divToAppend')
 
@@ -17,15 +17,15 @@ function createDivHabit(habitText, habitID, goalStreakText, currentN, goalN, fre
 
     switch (frequencyText) {
         case 'Daily':
-            variable = ' btn-success'
+            variable = ' btn-danger'
             break;
 
         case 'Weekly':
-            variable = ' btn-info'
+            variable = ' btn-success'
             break;
     
         default:
-            variable = ' btn-primary'
+            variable = ' btn-info'
             break;
     }
 
