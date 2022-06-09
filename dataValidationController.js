@@ -1,124 +1,91 @@
-//These are the contraints on the modal popup form
+//DATA VALIDATION FOR THE 'ADD HABIT POPUP'
+async function SetUpDataVal() {
 
-///////////////////////////////////////////////////
-//set up vars:
-///////////////////////////////////////////////////
+    //set the text for invaild inputs 
+    const issue_HabitName = document.getElementById ("label_issue_habitname")
+    const issue_Amount = document.getElementById ("label_issue_amount")
+    
+    issue_HabitName.style.color="red"
+    issue_HabitName.style.visibility="hidden"
+    issue_Amount.style.color="red"
+    issue_Amount.style.visibility="hidden"
 
-//Character Contraints -VALUES
-const maxLen_HabbitName = 10
-const minLen_HabbitName = 2
+    //set the habit name character limit
+    const maxLen_HabitName = 20
+    const form_HabitName = document.getElementById ("habitName")
+    form_HabitName.setAttribute("maxlength", maxLen_HabitName);
+ 
+    //turn off 'Add habit btn'
+    const btn_AddHabit = document.getElementById ("addHabitBtn","")
+    btn_AddHabit.setAttribute("disabled","");
+    btn_AddHabit.style.background="gray"
+}
+SetUpDataVal()
 
-const minLen_addAmount = 1  //min = 0
-const maxLen_addAmount = 2  //max = 99
-
-
-//HTML Elements
-const form_HabbitName = document.getElementById ("habitName")
-const form_AddAmount = document.getElementById ("amount")
-
-const issue_HabbitName = document.getElementById ("label_issue_habitname")
-const issue_Amount = document.getElementById ("label_issue_amount")
-
-
-const btn_AddHabit = document.getElementById ("addHabitBtn","")
-
-btn_AddHabit.setAttribute("disabled","");
-btn_AddHabit.style.background="gray"
-
-// issue_HabbitName.style.display="none"
-issue_HabbitName.style.color="red"
-issue_HabbitName.style.visibility="hidden"
-
-issue_Amount.style.color="red"
-issue_Amount.style.visibility="hidden"
-
-
-///////////////////////////////////////////////////
-//HTML contraints
-///////////////////////////////////////////////////
-
-
-//HABIT NAME - contraints
-form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
-
-//AMOUNT range limit
-// form_AddAmount.setAttribute("max", "2");
-// ="10" min="1" required
-
-
-console.log(document.querySelector('#frequency').value)
-
-async function entered() {
+//this func: 
+//   -checks the data in the 'add habit' form when a value is changed or added to the form
+//   - if conditions met, submit btn is then turned off 
+async function CheckFormData() {
+    const btn_AddHabit = document.getElementById ("addHabitBtn","")
+    const issue_HabitName = document.getElementById ("label_issue_habitname")
+    const issue_Amount = document.getElementById ("label_issue_amount")
+    const form_AddAmount = document.getElementById ("amount")
     checkHabitNameField()
     checkAmountField()
     
+    //if all fields are ok, turn on/off submit btn 
     if (checkAmountField()===true && checkHabitNameField() && document.querySelector('#frequency').value !== 'Frequency') {
-        
-        console.log("BUTTON ON!")
         btn_AddHabit.removeAttribute("disabled","");
         btn_AddHabit.style.background="#0093AB"
-
     }
     else {
-        console.log("BUTTON off")
         btn_AddHabit.setAttribute("disabled","");
         btn_AddHabit.style.background="gray"
     }
-}
 
+    function checkHabitNameField() { 
+        const minLen_HabitName = 2
+        const form_HabitName = document.getElementById ("habitName")
 
-
-
-function checkHabitNameField() { 
-    console.log("CHECKING THIS") 
-    if (form_HabbitName.value.length === 0 ){
-        form_HabbitName.style.background="white"
-         console.log ("habit name is empty again")
-         issue_HabbitName.style.visibility="hidden"
-
-         return false
+        //check if nothing is in the field - remove warning text
+        if (form_HabitName.value.length === 0 ){
+            form_HabitName.style.background="white"
+             issue_HabitName.style.visibility="hidden"
+             return false
+        }
+        //check if the field is too short- show warning text
+        else if (form_HabitName.value.length <= minLen_HabitName) {
+            form_HabitName.style.color="red"
+            issue_HabitName.style.visibility="visible"
+            return false
+        }
+        //check if field value is long enough- remove warning text
+        if (form_HabitName.value.length > minLen_HabitName) {
+            form_HabitName.style.color="black"
+            issue_HabitName.style.visibility="hidden"
+            return true
+        }    
     }
-    else if (form_HabbitName.value.length <= 2) {
-        console.log("name's too short,", form_HabbitName.value)
-        // form_HabbitName.style.background="red"
-        form_HabbitName.style.color="red"
-        // form_HabbitName.classList.add("border-danger")
-        issue_HabbitName.style.visibility="visible"
-        
-        return false
-    }
-    if (form_HabbitName.value.length >= 3) {
-        console.log("name's too short,", form_HabbitName.value)
-        form_HabbitName.style.color="black"
-        issue_HabbitName.style.visibility="hidden"
-        return true
-    }    
-}
-
-function checkAmountField (){
     
-    let checkAmount = form_AddAmount.value
-    
-    console.log("form_AddAmount.value", form_AddAmount.value)
-    if (form_AddAmount.value.length === 0 ){
-    //    form_AddAmount.style.background="white"
-        form_AddAmount.style.color="black"
-        issue_Amount.style.visibility="hidden"
-        console.log ("AMOUNT is empty again")
-        return false
-    }
-    else if (checkAmount > 99  || checkAmount <= "0"  ) {
-        // form_AddAmount.style.background="red"
-        console.log("AMOUNT too high or too low!")
-        form_AddAmount.style.color="red"
-        issue_Amount.style.visibility="visible"
-        return false
-    }
-    else{
-        // form_AddAmount.style.background="white"
-        form_AddAmount.style.color="black"
-        console.log ("AMOUNT is valid")
-        issue_Amount.style.visibility="hidden"
-        return true
+    function checkAmountField (){
+        let checkAmount = form_AddAmount.value
+        //check if the field is empty- remove warning text
+        if (form_AddAmount.value.length === 0 ){
+            form_AddAmount.style.color="black"
+            issue_Amount.style.visibility="hidden"
+            return false
+        }
+        //check if amount field is the wrong num - show warning text
+        else if (checkAmount > 99  || checkAmount <= "0"  ) {
+            form_AddAmount.style.color="red"
+            issue_Amount.style.visibility="visible"
+            return false
+        }
+        //check if the field is ok, remove warning text
+        else{
+            form_AddAmount.style.color="black"
+            issue_Amount.style.visibility="hidden"
+            return true
+        }
     }
 }
