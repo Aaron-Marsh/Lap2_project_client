@@ -46,21 +46,17 @@ form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
 // ="10" min="1" required
 
 
-console.log(document.querySelector('#frequency').value)
-
 async function entered() {
     checkHabitNameField()
     checkAmountField()
     
     if (checkAmountField()===true && checkHabitNameField() && document.querySelector('#frequency').value !== 'Frequency') {
         
-        console.log("BUTTON ON!")
         btn_AddHabit.removeAttribute("disabled","");
         btn_AddHabit.style.background="#0093AB"
 
     }
     else {
-        console.log("BUTTON off")
         btn_AddHabit.setAttribute("disabled","");
         btn_AddHabit.style.background="gray"
     }
@@ -70,16 +66,13 @@ async function entered() {
 
 
 function checkHabitNameField() { 
-    console.log("CHECKING THIS") 
     if (form_HabbitName.value.length === 0 ){
         form_HabbitName.style.background="white"
-         console.log ("habit name is empty again")
          issue_HabbitName.style.visibility="hidden"
 
          return false
     }
     else if (form_HabbitName.value.length <= 2) {
-        console.log("name's too short,", form_HabbitName.value)
         // form_HabbitName.style.background="red"
         form_HabbitName.style.color="red"
         // form_HabbitName.classList.add("border-danger")
@@ -88,7 +81,6 @@ function checkHabitNameField() {
         return false
     }
     if (form_HabbitName.value.length >= 3) {
-        console.log("name's too short,", form_HabbitName.value)
         form_HabbitName.style.color="black"
         issue_HabbitName.style.visibility="hidden"
         return true
@@ -99,17 +91,14 @@ function checkAmountField (){
     
     let checkAmount = form_AddAmount.value
     
-    console.log("form_AddAmount.value", form_AddAmount.value)
     if (form_AddAmount.value.length === 0 ){
     //    form_AddAmount.style.background="white"
         form_AddAmount.style.color="black"
         issue_Amount.style.visibility="hidden"
-        console.log ("AMOUNT is empty again")
         return false
     }
     else if (checkAmount > 99  || checkAmount <= "0"  ) {
         // form_AddAmount.style.background="red"
-        console.log("AMOUNT too high or too low!")
         form_AddAmount.style.color="red"
         issue_Amount.style.visibility="visible"
         return false
@@ -117,7 +106,6 @@ function checkAmountField (){
     else{
         // form_AddAmount.style.background="white"
         form_AddAmount.style.color="black"
-        console.log ("AMOUNT is valid")
         issue_Amount.style.visibility="hidden"
         return true
     }
