@@ -18,6 +18,7 @@ describe('java', () => {
         document.documentElement.innerHTML = html.toString();
         funcs = require('../static/js/fetchFunctions')
         // app = require('../bundle.js')
+        // app = require('./static/js/content.js')
         // app.fetchLogin('monia','pass')
 
     })
@@ -27,11 +28,20 @@ describe('java', () => {
     })
          test('test get habits ', async() => {  
              fetch.mockResponse(JSON.stringify( {"habits":[]}))
+             fetch.mockReject(new Error('Fake disaster'))
             const returnVal = await funcs.fetchGetHabitsByUser('monia')
             expect(fetch).toHaveBeenCalled()
             expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/habits/user/monia')
-            // expect(returnVal).toContain({habits:[]})
+            expect(JSON.stringify(returnVal)).toContain('Fake disaster')
+            // expect(JSON.stringify(returnVal)).toContain({habits:[]})
         })
+        test('test get habits 2 ', async() => {  
+            fetch.mockResponse(JSON.stringify( {"habits":[]}))
+            
+           const returnVal = await funcs.fetchGetHabitsByUser('monia')
+  
+           expect(JSON.stringify(returnVal)).toContain(JSON.stringify({'habits':[]}))
+       })
 
         test('test delete habits', async() => {  
             fetch.mockResponse(JSON.stringify( {"habits":[]}))
@@ -63,19 +73,13 @@ describe('java', () => {
 
    test('test patch habit', async() => {  
     fetch.mockResponse(habitData={
-        "id": 'monia',
-        "command": '1'
+        "id":'monia',
+        "command":'1'
     })
    const returnVal = await funcs.fetchPatchHabit('monia',1)
    expect(fetch).toHaveBeenCalled()
    expect(fetch).toHaveBeenCalledTimes(1)
-   expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/habits/monia',{
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(habitData) 
-  })
+   expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/habits/monia',{"body": "{\"id\":\"monia\",\"command\":1}", "headers": {"Content-Type": "application/json"}, "method": "PATCH"})
    // expect(returnVal).toContain({habits:[]})
 })
 
