@@ -5,17 +5,17 @@
 ///////////////////////////////////////////////////
 
 //Character Contraints -VALUES
-const minLen_HabbitName = 2
+const minLen_HabitName = 2
 
 const minLen_addAmount = 1  //min = 0
 const maxLen_addAmount = 2  //max = 99
 
 
 //HTML Elements
-const form_HabbitName = document.getElementById ("habitName")
+const form_HabitName = document.getElementById ("habitName")
 const form_AddAmount = document.getElementById ("amount")
 
-const issue_HabbitName = document.getElementById ("label_issue_habitname")
+const issue_HabitName = document.getElementById ("label_issue_habitname")
 const issue_Amount = document.getElementById ("label_issue_amount")
 
 
@@ -24,8 +24,8 @@ const btn_AddHabit = document.getElementById ("addHabitBtn","")
 btn_AddHabit.setAttribute("disabled","");
 btn_AddHabit.style.background="gray"
 
-issue_HabbitName.style.color="red"
-issue_HabbitName.style.visibility="hidden"
+issue_HabitName.style.color="red"
+issue_HabitName.style.visibility="hidden"
 
 issue_Amount.style.color="red"
 issue_Amount.style.visibility="hidden"
@@ -40,13 +40,19 @@ issue_Amount.style.visibility="hidden"
 
 
 function SetUpDataVal() {
-    const maxLen_HabbitName = 10
-    form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
+    //set the habit name character limit
+    const maxLen_HabitName = 20
+    form_HabitName.setAttribute("maxlength", maxLen_HabitName);
+
+
 
 }
-
 SetUpDataVal()
 
+
+//this func: 
+//   -checks the data in the 'add habit' form when a value is changed or added to the form
+//   - if conditions met, submit btn is then turned off 
 async function CheckFormData() {
     checkHabitNameField()
     checkAmountField()
@@ -61,21 +67,21 @@ async function CheckFormData() {
     }
 
     function checkHabitNameField() { 
-        if (form_HabbitName.value.length === 0 ){
-            form_HabbitName.style.background="white"
-             issue_HabbitName.style.visibility="hidden"
+        if (form_HabitName.value.length === 0 ){
+            form_HabitName.style.background="white"
+             issue_HabitName.style.visibility="hidden"
     
              return false
         }
-        else if (form_HabbitName.value.length <= 2) {
-            form_HabbitName.style.color="red"
-            issue_HabbitName.style.visibility="visible"
+        else if (form_HabitName.value.length <= 2) {
+            form_HabitName.style.color="red"
+            issue_HabitName.style.visibility="visible"
             
             return false
         }
-        if (form_HabbitName.value.length >= 3) {
-            form_HabbitName.style.color="black"
-            issue_HabbitName.style.visibility="hidden"
+        if (form_HabitName.value.length >= 3) {
+            form_HabitName.style.color="black"
+            issue_HabitName.style.visibility="hidden"
             return true
         }    
     }
@@ -100,8 +106,4 @@ async function CheckFormData() {
             return true
         }
     }
-    
-
-
-
 }
