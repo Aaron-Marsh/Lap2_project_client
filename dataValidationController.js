@@ -25,7 +25,6 @@ const btn_AddHabit = document.getElementById ("addHabitBtn","")
 btn_AddHabit.setAttribute("disabled","");
 btn_AddHabit.style.background="gray"
 
-// issue_HabbitName.style.display="none"
 issue_HabbitName.style.color="red"
 issue_HabbitName.style.visibility="hidden"
 
@@ -37,14 +36,8 @@ issue_Amount.style.visibility="hidden"
 //HTML contraints
 ///////////////////////////////////////////////////
 
-
 //HABIT NAME - contraints
 form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
-
-//AMOUNT range limit
-// form_AddAmount.setAttribute("max", "2");
-// ="10" min="1" required
-
 
 async function entered() {
     checkHabitNameField()
@@ -73,9 +66,7 @@ function checkHabitNameField() {
          return false
     }
     else if (form_HabbitName.value.length <= 2) {
-        // form_HabbitName.style.background="red"
         form_HabbitName.style.color="red"
-        // form_HabbitName.classList.add("border-danger")
         issue_HabbitName.style.visibility="visible"
         
         return false
@@ -92,19 +83,16 @@ function checkAmountField (){
     let checkAmount = form_AddAmount.value
     
     if (form_AddAmount.value.length === 0 ){
-    //    form_AddAmount.style.background="white"
         form_AddAmount.style.color="black"
         issue_Amount.style.visibility="hidden"
         return false
     }
     else if (checkAmount > 99  || checkAmount <= "0"  ) {
-        // form_AddAmount.style.background="red"
         form_AddAmount.style.color="red"
         issue_Amount.style.visibility="visible"
         return false
     }
     else{
-        // form_AddAmount.style.background="white"
         form_AddAmount.style.color="black"
         issue_Amount.style.visibility="hidden"
         return true
