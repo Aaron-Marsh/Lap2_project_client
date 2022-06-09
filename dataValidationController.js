@@ -5,7 +5,6 @@
 ///////////////////////////////////////////////////
 
 //Character Contraints -VALUES
-const maxLen_HabbitName = 10
 const minLen_HabbitName = 2
 
 const minLen_addAmount = 1  //min = 0
@@ -36,65 +35,78 @@ issue_Amount.style.visibility="hidden"
 //HTML contraints
 ///////////////////////////////////////////////////
 
-//HABIT NAME - contraints
-form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
+
+
+
+
+function SetUpDataVal() {
+    const maxLen_HabbitName = 10
+    form_HabbitName.setAttribute("maxlength", maxLen_HabbitName);
+
+}
+
+SetUpDataVal()
+
+
+
+
+
 
 async function entered() {
     checkHabitNameField()
     checkAmountField()
     
     if (checkAmountField()===true && checkHabitNameField() && document.querySelector('#frequency').value !== 'Frequency') {
-        
         btn_AddHabit.removeAttribute("disabled","");
         btn_AddHabit.style.background="#0093AB"
-
     }
     else {
         btn_AddHabit.setAttribute("disabled","");
         btn_AddHabit.style.background="gray"
     }
-}
 
-
-
-
-function checkHabitNameField() { 
-    if (form_HabbitName.value.length === 0 ){
-        form_HabbitName.style.background="white"
-         issue_HabbitName.style.visibility="hidden"
-
-         return false
+    function checkHabitNameField() { 
+        if (form_HabbitName.value.length === 0 ){
+            form_HabbitName.style.background="white"
+             issue_HabbitName.style.visibility="hidden"
+    
+             return false
+        }
+        else if (form_HabbitName.value.length <= 2) {
+            form_HabbitName.style.color="red"
+            issue_HabbitName.style.visibility="visible"
+            
+            return false
+        }
+        if (form_HabbitName.value.length >= 3) {
+            form_HabbitName.style.color="black"
+            issue_HabbitName.style.visibility="hidden"
+            return true
+        }    
     }
-    else if (form_HabbitName.value.length <= 2) {
-        form_HabbitName.style.color="red"
-        issue_HabbitName.style.visibility="visible"
+    
+    function checkAmountField (){
         
-        return false
+        let checkAmount = form_AddAmount.value
+        
+        if (form_AddAmount.value.length === 0 ){
+            form_AddAmount.style.color="black"
+            issue_Amount.style.visibility="hidden"
+            return false
+        }
+        else if (checkAmount > 99  || checkAmount <= "0"  ) {
+            form_AddAmount.style.color="red"
+            issue_Amount.style.visibility="visible"
+            return false
+        }
+        else{
+            form_AddAmount.style.color="black"
+            issue_Amount.style.visibility="hidden"
+            return true
+        }
     }
-    if (form_HabbitName.value.length >= 3) {
-        form_HabbitName.style.color="black"
-        issue_HabbitName.style.visibility="hidden"
-        return true
-    }    
-}
+    
 
-function checkAmountField (){
-    
-    let checkAmount = form_AddAmount.value
-    
-    if (form_AddAmount.value.length === 0 ){
-        form_AddAmount.style.color="black"
-        issue_Amount.style.visibility="hidden"
-        return false
-    }
-    else if (checkAmount > 99  || checkAmount <= "0"  ) {
-        form_AddAmount.style.color="red"
-        issue_Amount.style.visibility="visible"
-        return false
-    }
-    else{
-        form_AddAmount.style.color="black"
-        issue_Amount.style.visibility="hidden"
-        return true
-    }
+
+
 }
