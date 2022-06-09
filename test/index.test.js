@@ -92,6 +92,19 @@ it ('form "amount" has the correct placeholder', ()=>{
 })
 
 
+// //form data check
+// it ('form "habit name" only accepts valid data', ()=>{
+// 	const habitnamefield =  document.querySelector("#habitName")
+// 	habitnamefield.value = 
+// 	expect(form.placeholder).toBe("Amount")
+// })
+
+//form frequency
+it ('form "amount" has the correct placeholder', ()=>{
+	const button = document.querySelector("#addHabitBtn")
+	expect(button.disabled).toBeTruthy()
+})
+
 
 
 
