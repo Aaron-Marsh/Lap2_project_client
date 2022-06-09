@@ -42,13 +42,13 @@ describe('java', () => {
        })
 
        test('test create habit', async() => {  
-        fetch.mockResponse(JSON.stringify( habitData={
+        fetch.mockResponse( habitData={
             "title": 'drink',
             "frequency": 'daily',
             "goal": 8,
             "startdate": '01/01/21',
             "userId": 'monia'
-        }))
+        })
        const returnVal = await funcs.fetchCreateHabit('drink','daily',8,'01/01/21','monia')
        expect(fetch).toHaveBeenCalled()
        expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/habits/new',{
@@ -56,24 +56,60 @@ describe('java', () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify( "{title:monia}") 
+        body: JSON.stringify( habitData) 
       })
        // expect(returnVal).toContain({habits:[]})
    })
 
    test('test patch habit', async() => {  
-    fetch.mockResponse(JSON.stringify( habitData={
+    fetch.mockResponse(habitData={
         "id": 'monia',
         "command": '1'
-    }))
+    })
    const returnVal = await funcs.fetchPatchHabit('monia',1)
    expect(fetch).toHaveBeenCalled()
+   expect(fetch).toHaveBeenCalledTimes(1)
    expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/habits/monia',{
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(habitData) 
+  })
+   // expect(returnVal).toContain({habits:[]})
+})
+
+
+test('test create user', async() => {  
+    fetch.mockResponse( habitData={
+        "username": 'username',
+        "password": 'password'
+    })
+   const returnVal = await funcs.fetchCreateUser('username','password')
+   expect(fetch).toHaveBeenCalled()
+   expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/auth/register',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify( habitData) 
+  })
+   // expect(returnVal).toContain({habits:[]})
+})
+
+test('test fetch login', async() => {  
+    fetch.mockResponse( habitData={
+        "username": 'username',
+        "password": 'password'
+    })
+   const returnVal = await funcs.fetchLogin('username','password')
+   expect(fetch).toHaveBeenCalled()
+   expect(fetch).toHaveBeenCalledWith('https://glacial-plains-13166.herokuapp.com/auth/login',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify( habitData) 
   })
    // expect(returnVal).toContain({habits:[]})
 })
