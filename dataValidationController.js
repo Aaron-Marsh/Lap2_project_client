@@ -26,12 +26,10 @@ SetUpDataVal()
 //   -checks the data in the 'add habit' form when a value is changed or added to the form
 //   - if conditions met, submit btn is then turned off 
 async function CheckFormData() {
-    const btn_AddHabit = document.getElementById ("addHabitBtn","")
-    const issue_HabitName = document.getElementById ("label_issue_habitname")
-    const issue_Amount = document.getElementById ("label_issue_amount")
-    const form_AddAmount = document.getElementById ("amount")
     checkHabitNameField()
     checkAmountField()
+
+    const btn_AddHabit = document.getElementById ("addHabitBtn","")
     
     //if all fields are ok, turn on/off submit btn 
     if (checkAmountField()===true && checkHabitNameField() && document.querySelector('#frequency').value !== 'Frequency') {
@@ -42,50 +40,49 @@ async function CheckFormData() {
         btn_AddHabit.setAttribute("disabled","");
         btn_AddHabit.style.background="gray"
     }
+}
 
-    function checkHabitNameField() { 
-        const minLen_HabitName = 2
-        const form_HabitName = document.getElementById ("habitName")
+function checkHabitNameField() { 
+    const minLen_HabitName = 2
+    const form_HabitName = document.getElementById ("habitName")
+    const issue_HabitName = document.getElementById ("label_issue_habitname")
+    issue_HabitName.style.visibility="hidden"
 
-        //check if nothing is in the field - remove warning text
-        if (form_HabitName.value.length === 0 ){
-            form_HabitName.style.background="white"
-             issue_HabitName.style.visibility="hidden"
-             return false
-        }
-        //check if the field is too short- show warning text
-        else if (form_HabitName.value.length <= minLen_HabitName) {
-            form_HabitName.style.color="red"
-            issue_HabitName.style.visibility="visible"
-            return false
-        }
-        //check if field value is long enough- remove warning text
-        if (form_HabitName.value.length > minLen_HabitName) {
-            form_HabitName.style.color="black"
-            issue_HabitName.style.visibility="hidden"
-            return true
-        }    
+    // //check if nothing is in the field - remove warning text
+    //check if the field is too short- show warning text
+    if (form_HabitName.value.length <= minLen_HabitName && form_HabitName.value.length > 0 || form_HabitName.value.trim().length === 0 ) {
+        form_HabitName.style.color="red"
+        issue_HabitName.style.visibility="visible"
+        return false
     }
-    
-    function checkAmountField (){
-        let checkAmount = form_AddAmount.value
-        //check if the field is empty- remove warning text
-        if (form_AddAmount.value.length === 0 ){
-            form_AddAmount.style.color="black"
-            issue_Amount.style.visibility="hidden"
-            return false
+    else{
+        form_HabitName.style.color="black"
+        issue_HabitName.style.visibility="hidden"
+        if (form_HabitName.value.length === 0) {
+           return false
         }
-        //check if amount field is the wrong num - show warning text
-        else if (checkAmount > 99  || checkAmount <= "0"  ) {
+        return true
+    }  
+}
+
+function checkAmountField (){
+    const issue_Amount = document.getElementById ("label_issue_amount")
+    const form_AddAmount = document.getElementById ("amount")
+    let checkAmount = form_AddAmount.value
+    issue_Amount.style.visibility="hidden"
+
+    //check if the field is empty- remove warning text
+    if (checkAmount > 99  || checkAmount <= "0" && checkAmount.length !==0  ) {
             form_AddAmount.style.color="red"
             issue_Amount.style.visibility="visible"
             return false
-        }
-        //check if the field is ok, remove warning text
-        else{
-            form_AddAmount.style.color="black"
-            issue_Amount.style.visibility="hidden"
-            return true
-        }
+    }
+    else {
+        form_AddAmount.style.color="black"
+        issue_Amount.style.visibility="hidden"
+        if (form_AddAmount.value.length === 0) {
+            return false
+         }
+        return true
     }
 }
