@@ -238,41 +238,32 @@ const spinLoad = document.querySelector('#spinLoad')
 
 
 function refreshPage(){
-
+    // Delete all habits and set loading spinner
     spinLoad.style.display = 'inline-block'
-
     divToAppend.innerHTML = ''
 
     // get user id from local storage
     let userId = localStorage.getItem('userid')
     
-    // userId = '629f5436dd2d086bd7dd757e'
-
     //fetch request to the server
     const data = fetchGetHabitsByUser(userId)
 
-    
-
-    
-    
+    //Unpack data and create habits div, if no habits prompt alert
     data.then((d)=>{
-
-
         if(d.habits.length > 0){
+            //Order habits based on frequency
             const newHabits = orderArray(d.habits)
-
+            //Create div per habit
             newHabits.forEach((o)=>{
             createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
         })
         }else{
             alert('You have no habits, add a habit!')
         }
-        
+
+        //Remove loading spinner
         spinLoad.style.display = 'none'
     })
-
-
-
 }
 
 
