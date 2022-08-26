@@ -39,26 +39,30 @@ loginBtn.addEventListener('click', e=>{
 signupBtn.addEventListener('click', e=>{
     e.preventDefault()
 
+    if (userName.value === '' || password.value === '') {
+        alert('To create a new account, enter a new username and password then click sign up!')
+    } else {
 
-    const responseRegistration = fetchCreateUser(userName.value, password.value)
-
-    console.log('Signup clicked')
-
-
-    responseRegistration.then((i)=>{
-
-        console.log(i)
-
-
-        if(i == '{"msg":"Username taken"}'){
-            alert('Please choose another username!')
-        }else{
-            alert('Username registered, please re-insert your password to login')
-        }
-    })
-
-    password.value = ''
-
+        const responseRegistration = fetchCreateUser(userName.value, password.value)
+        
+        console.log('Signup clicked')
+        
+        
+        responseRegistration.then((i)=>{
+            
+            console.log(i)
+            
+            
+            if(i == '{"msg":"Username taken"}'){
+                alert('Please choose another username! That one is taken!')
+            }else{
+                alert('Username registered, please re-insert your password to login!')
+            }
+        })
+        
+        password.value = ''
+    }
+        
 
     // popup!
 })

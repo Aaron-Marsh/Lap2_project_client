@@ -258,7 +258,7 @@ function refreshPage(){
             createDivHabit(o.title, o.id, o.streak, o.current, o.goal, o.frequency)
         })
         }else{
-            alert('You have no habits, add a habit!')
+            alert('You have no habits, add a habit to track! Give it a name, a frequency, and a target e.g. gym weekly 3 times!')
         }
 
         //Remove loading spinner
